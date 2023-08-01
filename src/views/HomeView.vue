@@ -1,18 +1,19 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <form>
+    <h4> Login </h4>
+      <div class="mb-3">
+        <label for="disabledTextInput" class="form-label">ID</label>
+        <input type="text" id="disabledTextInput" class="form-control" placeholder="ID">
+      </div>
+      <div class="mb-3">
+        <label for="disabledSelect" class="form-label">PASSWORD</label>
+        <input type="text" id="disabledTextInput" class="form-control" placeholder="PASSWORD">
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <router-link to="register" class="btn btn-primary">Register</router-link>
+  </form>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
 </script>
