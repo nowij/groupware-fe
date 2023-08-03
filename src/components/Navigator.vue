@@ -2,7 +2,10 @@
     <nav>
         <div>
             <router-link to="/">Home</router-link> |
-            <router-link to="/binding">Binding</router-link>
+            <router-link to="/binding">마이페이지</router-link> | 
+            <router-link to="/employee/list">정보조회</router-link> | 
+            <router-link to="/b">게시판</router-link> | 
+            <router-link to="/c">전자결재</router-link>
         </div>
     </nav>
 </template>
