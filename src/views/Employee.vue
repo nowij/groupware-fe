@@ -8,11 +8,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr :key="i" v-for="(employee, i) in employeeList">
+                <tr v-for="employee in employeeList" :key="employee">
                     <td>{{ employee.employeeId }}</td>
                     <td>{{ employee.userName }}</td>
                 </tr>
-            </tbody>1
+            </tbody>
         </table>
     </div>
 </template>
@@ -21,16 +21,19 @@
     export default {
         data() {
             return {
-                employeeList: []
-            };
+                employeeList: [],
+            }
         },
-        created() {
-            this.getList();
+        mounted() {
+            this.get();
         },
         methods: {
-            async getList() {
-                this.employeeList = await this.$api("localhost:8080/employee/info", "get", '');
-            }
+            get() {
+                this.axios.get('/employee/info').then(res => { 
+                    console.log(res.data);
+                    this.employeeList = res.data;
+            });
+            },
         }
     }
 </script>
