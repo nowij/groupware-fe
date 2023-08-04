@@ -36,14 +36,15 @@
                     </select>
                 </div>
                 <div class="me-1">
-                    <button type="submit" class="btn" @click.self.prevent="search">검색</button>
+                    <button type="submit" class="btn btn-outline-secondary" @click.self.prevent="search">검색</button>
                 </div>
             </div>
         </form>
     </div>
 
     <div>
-        <table class="table">
+        <h5 class="card-title">직원 조회</h5>
+        <table class="table table-striped text-center">
             <thead>
                 <tr>
                     <th>사번</th>

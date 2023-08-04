@@ -1,13 +1,20 @@
 <template>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">GroupWare</span>
+      </a>
+    </div>
     <nav>
-        <div>
-            <router-link to="/">Home</router-link> |
-            <router-link to="/employee/mypage">마이페이지</router-link> | 
-            <router-link to="/employee/info">정보조회</router-link> | 
-            <router-link to="/b">게시판</router-link> | 
-            <router-link to="/c">전자결재</router-link>
-        </div>
+      <div>
+        <router-link to="/" class="p-2">Home</router-link>
+        <router-link to="/employee/mypage" class="p-2">마이페이지</router-link>
+        <router-link to="/employee/info" class="p-2">정보조회</router-link>
+        <router-link to="/b" class="p-2">게시판</router-link>
+        <router-link to="/c" class="p-2">전자결재</router-link>
+      </div>
     </nav>
+  </header>
 </template>
 
 <style>
@@ -21,6 +28,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #4154f1;
 }
 </style>

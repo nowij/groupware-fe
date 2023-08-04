@@ -1,16 +1,18 @@
 <template>
   <div class="app-container">
     <Nav />
-    <div class="container pt-4 pb-4">
-      <router-view/>
-    </div>
+    <Alert />
+    <div id="main">
+      <router-view />
+    </div>  
   </div>
 </template>
 
 <script setup>
-import { Nav } from '@/components';
+import { Nav, Alert } from '@/components';
 </script>
 
 <style>
 @import './assets/base.css';
+@import '@/assets/style.css';
 </style>
