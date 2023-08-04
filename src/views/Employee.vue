@@ -1,4 +1,47 @@
 <template>
+    <div id="searchArea">
+        <form>
+            <div class="d-flex pt-2 pb-5 justify-content-center">
+                <div class="me-1">
+                    <input type="text" placeholder="사번" class="form-control" v-model="searchId">
+                </div>
+                <div class="me-1">
+                    <input type="text" placeholder="성명" class="form-control" v-model="searchName">
+                </div>
+                <div class="me-1">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>직위</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="me-1">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>소속</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="me-1">
+                    <input type="text" placeholder="전화번호" class="form-control" v-model="searchPhone">
+                </div>
+                <div class="me-1">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>재직</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="me-1">
+                    <button type="submit" class="btn" @click.self.prevent="search">검색</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <div>
         <table class="table">
             <thead>
@@ -33,6 +76,9 @@
         data() {
             return {
                 employeeList: [],
+                searchId: null,
+                searchName: null,
+                searchPhone: null,
             }
         },
         mounted() {
@@ -40,11 +86,33 @@
         },
         methods: {
             get() {
-                this.axios.get('/employee/info').then(res => { 
-                    console.log(res.data);
+                this.axios.get('/employee/info')
+                .then(res => {
                     this.employeeList = res.data;
             });
             },
+            search() {
+                this.axios.post('/employee/info/search', {
+                    employeeId: this.searchId,
+                    userName: this.searchName,
+                    phone: this.searchPhone
+                }).then(res => {
+                    console.log(res.data);
+                    this.employeeList = res.data
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
         }
     }
 </script>
+
+<style>
+    #searchArea select {
+        width: 6rem;
+    }
+
+    #searchArea input {
+        width: 10rem;
+    }
+</style>
