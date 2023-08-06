@@ -13,6 +13,5 @@ import { Nav, Alert } from '@/components';
 </script>
 
 <style>
-@import './assets/base.css';
 @import '@/assets/style.css';
 </style>

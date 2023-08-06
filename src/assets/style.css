@@ -255,6 +255,10 @@ h6 {
 }
 
 /* Alerts */
+.alert {
+  top:55px; 
+}
+
 .alert-heading {
   font-weight: 500;
   font-family: "Poppins", sans-serif;

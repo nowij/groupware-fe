@@ -3,9 +3,7 @@ import { createPinia } from 'pinia'
 
 import Axios from 'axios'
 import App from './App.vue'
-import router from './router'
-
-//import mixins from '@/mixins'
+import router from './routers'
 
 const pinia = createPinia()
 const app = createApp(App)

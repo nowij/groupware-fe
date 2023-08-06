@@ -3,15 +3,16 @@ import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Employee from '@/views/Employee.vue'
 import MyPage from '@/views/Mypage.vue';
+import Main from '@/views/Main.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/auth/login',
     name: 'login',
     component: Login
   },
   {
-    path: '/register',
+    path: '/auth/register',
     name: 'register',
     component: Register
   },
@@ -23,6 +24,10 @@ const routes = [
   {
     path: '/employee/mypage',
     component: MyPage
+  },
+  {
+    path: '/',
+    component: Main
   }
 ]
 
