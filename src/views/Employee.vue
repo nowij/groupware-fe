@@ -73,8 +73,12 @@
 </template>
 
 <script>
+    // import { axiosWrapper } from '@/mixins';
+    import { useEmployeeStore } from '@/stores';
+import { storeToRefs } from 'pinia';
+
     export default {
-        data() {
+        setup() {
             return {
                 employeeList: [],
                 searchId: null,
@@ -82,15 +86,29 @@
                 searchPhone: null,
             }
         },
+        // data() {
+        //     return {
+        //         employeeList: [],
+        //         searchId: null,
+        //         searchName: null,
+        //         searchPhone: null,
+        //     }
+        // },
         mounted() {
             this.get();
         },
         methods: {
             get() {
-                this.axios.get('/employee/info')
-                .then(res => {
-                    this.employeeList = res.data;
-            });
+//                axiosWrapper.get('/employee/info')
+                const employeeStore = useEmployeeStore;
+                const { employees } = storeToRefs(employeeStore);
+                this.employeeList = employees
+
+
+            //     this.axios.get('/employee/info')
+            //     .then(res => {
+            //         this.employeeList = res.data;
+            // });
             },
             search() {
                 this.axios.post('/employee/info/search', {

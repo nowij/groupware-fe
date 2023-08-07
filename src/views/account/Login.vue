@@ -42,7 +42,6 @@ export default {
       console.log(id, pwd);
       const authStore = useAuthStore();
       authStore.login(id, pwd);
-
       // await axios.post(`${baseUrl}/auth/login`
       //   , {
       //     employeeId: id,
