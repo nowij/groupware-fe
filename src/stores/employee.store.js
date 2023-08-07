@@ -4,11 +4,17 @@ import { axiosWrapper } from "@/mixins";
 export const useEmployeeStore = defineStore({
     id: 'employee',
     state: () => ({
-        employees: []
+        employees: {}
     }),
     actions: {
         async getEmployees() {
-            axiosWrapper.get('/employee/info');
+            try {
+                const response = await axiosWrapper.get('/employee/info');
+                this.employees = response;
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 });

@@ -3,7 +3,7 @@ import { useAuthStore } from "./stores";
 
 const baseUrl = 'http://localhost:8080';
 
-export const axiosWrapper= {
+export const axiosWrapper = {
     get: request('GET'),
     post: request('POST'),
     put: request('PUT'),
@@ -17,7 +17,7 @@ function request(method) {
             headers: authHeader(),
             url: baseUrl+url
         };
-        console.log(body);
+
         if (body) {
             requestOptions.headers['Content-Type'] = 'application/json';
             requestOptions.data = body;
@@ -28,7 +28,8 @@ function request(method) {
         return axios(requestOptions)
         .then(res => {
             console.log(res.data);
-            //handleResponse(res)
+            return res.data
+            //handleResponse(res);
         })
         .catch(err => {
             console.log('axios 에러');
@@ -58,13 +59,13 @@ function authHeader() {
 
 // async function handleResponse(response) {
 //     const isJson = response.headers?.get('content-type')?.includes('application/json');
-//     const data = isJson ? await response.json() : null;
+//     const data = isJson ? await response.JSON : null;
 
 //     console.log("response 확인");
 //     console.log(response);
 
 //     // check for error response
-//     if (!response.ok) {
+//     if (response.status != 200) {
 //         const { user, logout } = useAuthStore();
 //         if ([401, 403].includes(response.status) && user) {
 //             // auto logout if 401 Unauthorized or 403 Forbidden response returned from api

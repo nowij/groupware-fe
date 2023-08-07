@@ -24,11 +24,6 @@
 
 <script>
 import {  useAuthStore } from '@/stores';
-//import { router } from '@/routers';
-//import axios from 'axios';
-//const baseUrl = 'http://localhost:8080';
-//import { Form, Field } from 'vee-validate';
-//import * as Yup from 'yup';
 
 export default {
   setup() {
@@ -42,25 +37,6 @@ export default {
       console.log(id, pwd);
       const authStore = useAuthStore();
       authStore.login(id, pwd);
-      // await axios.post(`${baseUrl}/auth/login`
-      //   , {
-      //     employeeId: id,
-      //     userPasswd: pwd
-      //   })
-      //   .then(res => {
-          
-      //     // 토큰을 로컬 스토리지에 저장
-      //     // localStorage.setItem('token', res.data.token);
-      //     // localStorage.setItem('employee', res.data.employeeId);
-
-      //     // // 메인페이지로 이동
-      //     // router.push('/');
-      //   })
-      //   .catch(err => {
-      //     const alertStore = useAlertStore();
-      //     console.log(err);
-      //     alertStore.error(err);
-      //   });
     }
   }
 }

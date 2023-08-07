@@ -57,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="employee in employeeList" :key="employee">
+                <tr v-for="(employee, i) in employeeList" :key="i">
                     <td>{{ employee.employeeId }}</td>
                     <td>{{ employee.userName }}</td>
                     <td>{{ employee.department.deptName }}</td>
@@ -73,37 +73,30 @@
 </template>
 
 <script>
-    // import { axiosWrapper } from '@/mixins';
     import { useEmployeeStore } from '@/stores';
-import { storeToRefs } from 'pinia';
+    import { storeToRefs } from 'pinia';
 
     export default {
         setup() {
             return {
-                employeeList: [],
+                employeeList: {},
                 searchId: null,
                 searchName: null,
                 searchPhone: null,
             }
         },
-        // data() {
-        //     return {
-        //         employeeList: [],
-        //         searchId: null,
-        //         searchName: null,
-        //         searchPhone: null,
-        //     }
-        // },
         mounted() {
             this.get();
         },
         methods: {
-            get() {
-//                axiosWrapper.get('/employee/info')
-                const employeeStore = useEmployeeStore;
+            async get() {
+                const employeeStore = useEmployeeStore();
+                await employeeStore.getEmployees()
+                
                 const { employees } = storeToRefs(employeeStore);
-                this.employeeList = employees
-
+                this.employeeList = JSON.parse(JSON.stringify(employees.value));
+                
+                console.log(this.employeeList);
 
             //     this.axios.get('/employee/info')
             //     .then(res => {

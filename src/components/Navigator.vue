@@ -12,10 +12,17 @@
         <router-link to="/employee/info" class="p-2">정보조회</router-link>
         <router-link to="/b" class="p-2">게시판</router-link>
         <router-link to="/c" class="p-2">전자결재</router-link>
+        <a @click="authStore.logout()">로그아웃</a>
       </div>
     </nav>
   </header>
 </template>
+
+<script setup>
+import { useAuthStore } from '@/stores';
+const authStore = useAuthStore();
+
+</script>
 
 <style>
 nav {
