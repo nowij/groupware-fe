@@ -10,9 +10,9 @@
 
 <script setup>
 import { useAuthStore } from '@/stores';
-import { router } from '@/router';
+import { router } from '@/routers';
 
-// redirect home if already logged in
+// 로그인 했을 때 home으로 리다이렉트
 const authStore = useAuthStore();
 if (authStore.user) {
     router.push('/');

@@ -11,13 +11,12 @@ export const useAuthStore = defineStore({
     // ref()
     state: () => ({
         // initialize state from local storage to enable user to stay logged in
-        user: JSON.parse(localStorage.getItem('user')),
+        user: localStorage.getItem('user'),
         returnUrl: null
     }),
     // function()
     actions: {
-        async login(employeeId, password) {
-            console.log("메소드 실행");
+        async login(id, pwd) {
             try {
                 // const config = {
                 //     method: 'POST',
@@ -28,29 +27,35 @@ export const useAuthStore = defineStore({
                 //     body: JSON.stringify({ username, password })
                 // }
                 //const user = await fetch(`${baseUrl}/auth/login`, config);
-                const user = await axios.post(`${baseUrl}/auth/login`,
-                 {
-                    employeeId: employeeId,
-                    userPassWd : password
-                },
-                 {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }
+                const headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+                console.log("메소드 실행 ", id, pwd);
+                axios.post(`${baseUrl}/auth/login`,{
+                    employeeId: id,
+                    userPasswd: pwd
+                },{headers}
+                ).then(res => {
+                    this.user = res.data;
+                    localStorage.setItem('user', JSON.stringify(res.data));
+                    console.log(res);
+                    router.push('/');
+                }).catch(err => {
+                    console.log(err);
                 });
 
-                console.log('>>>> user = ')
-                console.log(user)
+                // console.log('>>>> user = ')
+                // console.log(user)
 
-                // update pinia state
-                this.user = user;
+                // // update pinia state
+                // this.user = user;
 
-                // store user details and jwt in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+                // // store user details and jwt in local storage to keep user logged in between page refreshes
+                // localStorage.setItem('user', JSON.stringify(user));
 
                 // redirect to previous url or default to home page
-                router.push(this.returnUrl || '/');
+                //router.push(this.returnUrl || '/');
             } catch (error) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);                

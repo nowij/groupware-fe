@@ -14,10 +14,8 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">부서</label>
-                            <select class="form-select">
-                                <option value="1" selected>One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" v-for="(department, i) in departments" :key="i">
+                                <option value="{{ department.deptCode }}">{{ department.deptName }}</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -26,10 +24,8 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">직위</label>
-                            <select class="form-select">
-                                <option value="1" selected>One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" v-for=" (position, i) in positions" :key="i">
+                                <option value="{{ position.positCode }}" >{{ position.positName }}</option>
                             </select>
                         </div>
                         <div class="col-12">
@@ -60,6 +56,37 @@
         </div>
     </div>
 </template>
+
+<script>
+import axios from 'axios';
+//import { useAlertStore } from '@/stores';
+
+    export default {
+        setup() {
+            return {
+                departments: [],
+                positions: []
+            }
+        }, 
+        mounted() {
+            axios.get('http://localhost:8080/cmm/department')
+            .then(res => {
+                this.departments = res.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+            axios.get('http://localhost:8080/cmm/position')
+            .then(res => {
+                this.positions = res.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+    }
+</script>
 
 <style>
 .card {
