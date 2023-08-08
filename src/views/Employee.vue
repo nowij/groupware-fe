@@ -59,8 +59,8 @@
                     <td>{{ employee.position.positionName }}</td>
                     <td>{{ employee.phone }}</td>
                     <td>{{ employee.email }}</td>
-                    <td v-if="employee.activeYn === 'N'">재직</td>
-                    <td v-else-if="employee.activeYn === 'Y'">퇴사</td>
+                    <td v-if="employee.activeYn === 'Y'">재직</td>
+                    <td v-else-if="employee.activeYn === 'N'">퇴사</td>
                 </tr>
             </tbody>
         </table>
