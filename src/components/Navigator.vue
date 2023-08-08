@@ -6,13 +6,14 @@
       </a>
     </div>
     <nav>
-      <div>
+      <div v-if="user">
         <router-link to="/" class="p-2">Home</router-link>
         <router-link to="/employee/mypage" class="p-2">마이페이지</router-link>
         <router-link to="/employee/info" class="p-2">정보조회</router-link>
         <router-link to="/b" class="p-2">게시판</router-link>
         <router-link to="/c" class="p-2">전자결재</router-link>
-        <a @click="authStore.logout()">로그아웃</a>
+        <router-link to="/auth/register" class="p-2">신규등록</router-link>
+        <a class="p-2" @click="authStore.logout()">로그아웃</a>
       </div>
     </nav>
   </header>
@@ -20,8 +21,11 @@
 
 <script setup>
 import { useAuthStore } from '@/stores';
+import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
-
+const { user } = storeToRefs(authStore);
+console.log('확인');
+console.log(user);
 </script>
 
 <style>
