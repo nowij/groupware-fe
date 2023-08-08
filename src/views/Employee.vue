@@ -9,34 +9,29 @@
                     <input type="text" placeholder="성명" class="form-control" v-model="searchName">
                 </div>
                 <div class="me-1">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>직위</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" v-model="searchDept" @change="selectValue">
+                        <option value="" selected>부서</option>
+                        <option v-for="(department,i) in departmentList" :key="i" :value="department.deptCode" >{{ department.deptName }}</option>
                     </select>
                 </div>
                 <div class="me-1">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>소속</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" v-model="searchPosit" @change="selectValue">
+                        <option value="" selected>직위</option>
+                        <option v-for="(position, i) in positionList" :key="i" :value="position.positCode">{{ position.positName }}</option>
                     </select>
                 </div>
                 <div class="me-1">
                     <input type="text" placeholder="전화번호" class="form-control" v-model="searchPhone">
                 </div>
                 <div class="me-1">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>재직</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select"  v-model="searchActive">
+                        <option value="Y" selected>재직</option>
+                        <option value="N">퇴사</option>
                     </select>
                 </div>
                 <div class="me-1">
                     <button type="submit" class="btn btn-outline-secondary" @click.self.prevent="search">검색</button>
+                    <button class="btn btn-outline-secondary" @click="reset">초기화</button>
                 </div>
             </div>
         </form>
@@ -73,47 +68,69 @@
 </template>
 
 <script>
-    import { useEmployeeStore } from '@/stores';
+    import { useEmployeeStore, useCommonStore } from '@/stores';
     import { storeToRefs } from 'pinia';
+    import { ref } from 'vue';
 
     export default {
         setup() {
             return {
-                employeeList: {},
-                searchId: null,
-                searchName: null,
-                searchPhone: null,
+                employeeList: ref([]),
+                positionList: ref([]),
+                departmentList: ref([]),
+
+                searchId: ref(null),
+                searchName: ref(null),
+                searchPhone: ref(null),
+                searchActive: ref('Y'),
+                searchDept: ref(''),
+                searchPosit: ref('')
             }
         },
         mounted() {
             this.get();
+            this.setCommon();
         },
         methods: {
             async get() {
                 const employeeStore = useEmployeeStore();
-                await employeeStore.getEmployees()
-                
                 const { employees } = storeToRefs(employeeStore);
-                this.employeeList = JSON.parse(JSON.stringify(employees.value));
-                
-                console.log(this.employeeList);
 
-            //     this.axios.get('/employee/info')
-            //     .then(res => {
-            //         this.employeeList = res.data;
-            // });
+                await employeeStore.getEmployees()
+                this.employeeList = employees.value;
             },
-            search() {
-                this.axios.post('/employee/info/search', {
+            async setCommon() {
+                const commonStore = useCommonStore();
+                const { positions, departments } = storeToRefs(commonStore);
+
+                await commonStore.getPositions();
+                await commonStore.getDepartments();
+                this.positionList = positions.value;
+                this.departmentList = departments.value;
+            },
+            async search() {
+                const searchParams ={
                     employeeId: this.searchId,
                     userName: this.searchName,
-                    phone: this.searchPhone
-                }).then(res => {
-                    console.log(res.data);
-                    this.employeeList = res.data
-                }).catch(err => {
-                    console.log(err);
-                })
+                    phone: this.searchPhone,
+                    activeYn: this.searchActive,
+                    positionCode: this.searchPosit,
+                    deptCode: this.searchDept,
+                }
+
+                const employeeStore = useEmployeeStore();
+                const { employees } = storeToRefs(employeeStore);
+
+                await employeeStore.selectEmployee(searchParams);   
+                this.employeeList = employees.value;
+            },
+            async reset() {
+                this.searchId = '';
+                this.searchName = '';
+                this.searchPhone = '';
+                this.searchDept = '';
+                this.searchPosit = '';
+                this.searchActive = 'Y';
             }
         }
     }

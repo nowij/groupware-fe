@@ -28,7 +28,7 @@ function request(method) {
         return axios(requestOptions)
         .then(res => {
             console.log(res.data);
-            return res.data
+            return res.data;
             //handleResponse(res);
         })
         .catch(err => {
@@ -46,7 +46,7 @@ function authHeader() {
     //const isApiUrl = url.startsWith(baseUrl);
     console.log('>>> isLoggedIn')
     console.log(isLoggedIn)
-    console.log('>>> isApiUrl')
+    //console.log('>>> isApiUrl')
     //console.log(isApiUrl)
     if (isLoggedIn) {
         const auth_token = { Authorization: `Bearer ${token}` }
