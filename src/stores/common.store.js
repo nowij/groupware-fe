@@ -11,7 +11,7 @@ export const useCommonStore = defineStore({
         async getPositions() {
             try {
                 const response = await axiosWrapper.get('/cmm/position');
-                this.positions = response;
+                this.positions = response.data;
             } catch (error) {
                 console.log(error);
             }
@@ -19,7 +19,7 @@ export const useCommonStore = defineStore({
         async getDepartments() {
             try {
                 const response = await axiosWrapper.get('/cmm/department');
-                this.departments = response;
+                this.departments = response.data;
             } catch (err) {
                 console.log(err);
             }

@@ -9,7 +9,7 @@ const baseUrl = 'http://localhost:8080';
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
-        user: localStorage.getItem('user'),
+        user: JSON.parse(localStorage.getItem('user')),
         returnUrl: null
     }),
     actions: {
@@ -34,6 +34,17 @@ export const useAuthStore = defineStore({
             this.user = null;
             localStorage.removeItem('user');
             router.push('/auth/login');
+        },
+        async register(param) {
+            try {
+                axios.post(`${baseUrl}/auth/register`, param)
+                .catch(err => {
+                    console.log(err);
+                });
+            } catch (error) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);                
+            }
         }
     }
 });

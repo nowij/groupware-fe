@@ -5,6 +5,7 @@ import Employee from '@/views/Employee.vue'
 import Main from '@/views/Main.vue';
 import accountRoute from './account.route';
 import employeeRoute from './employee.route';
+import Register from '@/views/Register.vue';
 
 const routes = [
   { ...accountRoute },
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/',
     component: Main
+  },
+  {
+    path: '/auth/register',
+    component: Register
   }
 ]
 
@@ -31,7 +36,7 @@ router.beforeEach(async (to) => {
   alertStore.clear();
 
   // redirect to login page if not logged in and trying to access a restricted page 
-  const publicPages = ['/auth/login',  ];
+  const publicPages = ['/auth/login', '/auth/register'];
   const authRequired = !publicPages.includes(to.path);
   const authStore = useAuthStore();
 

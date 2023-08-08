@@ -28,7 +28,7 @@ function request(method) {
         return axios(requestOptions)
         .then(res => {
             console.log(res.data);
-            return res.data;
+            return res;
             //handleResponse(res);
         })
         .catch(err => {

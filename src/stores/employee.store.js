@@ -10,7 +10,7 @@ export const useEmployeeStore = defineStore({
         async getEmployees() {
             try {
                 const response = await axiosWrapper.get('/employee/info');
-                this.employees = response;
+                this.employees = response.data;
             } catch (error) {
                 console.log(error);
             }
@@ -18,7 +18,7 @@ export const useEmployeeStore = defineStore({
         async selectEmployee(param) {
             try {
                 const response = await axiosWrapper.post('/employee/info/search', param);
-                this.employees = response;
+                this.employees = response.data;
             } catch (error) {
                 console.log(error);
             }

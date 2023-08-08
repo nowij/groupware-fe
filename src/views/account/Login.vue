@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     async onSubmit(id, pwd) {
-      console.log(id, pwd);
       const authStore = useAuthStore();
       authStore.login(id, pwd);
     }
