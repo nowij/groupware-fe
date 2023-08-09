@@ -32,7 +32,7 @@
                     </select>
                 </div>
                 <div class="me-1">
-                    <button type="submit" class="btn btn-outline-secondary" @click.self.prevent="search">검색</button>
+                    <button type="submit" class="btn btn-outline-secondary me-1" @click.self.prevent="search">검색</button>
                     <button class="btn btn-outline-secondary" @click="reset">초기화</button>
                 </div>
             </div>
@@ -77,8 +77,8 @@ import { ref } from 'vue';
 export default {
     setup() {
         return {
-            employeeList: ref([]),
-            positionList: ref([]),
+            employeeList: [],
+            positionList: [],
             departmentList: ref([]),
 
             searchId: ref(null),
@@ -99,7 +99,7 @@ export default {
             const { employees } = storeToRefs(employeeStore);
 
             await employeeStore.getEmployees()
-            this.employeeList = employees.value;
+            this.employeeList = employees;
         },
         async setCommon() {
             const commonStore = useCommonStore();
@@ -107,8 +107,10 @@ export default {
 
             await commonStore.getPositions();
             await commonStore.getDepartments();
-            this.positionList = positions.value;
+            this.positionList = positions;
             this.departmentList = departments.value;
+            console.log("common >>> ")
+            console.log(this.departmentList)
         },
         async search() {
             const searchParams = {
@@ -126,7 +128,7 @@ export default {
             await employeeStore.selectEmployee(searchParams);
             this.employeeList = employees.value;
         },
-        async reset() {
+        reset() {
             this.searchId = '';
             this.searchName = '';
             this.searchPhone = '';

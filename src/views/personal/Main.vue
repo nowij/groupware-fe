@@ -15,12 +15,11 @@
 <script>
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
 
 export default {
     setup() {
         return {
-            user: ref({})
+            user: {}
         }
     },
     created() {
