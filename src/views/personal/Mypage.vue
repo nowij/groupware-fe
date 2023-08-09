@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary" @click.self.prevent="submit">저장</button>
+                                        <button type="submit" class="btn btn-primary w-100" @click.self.prevent="submit">저장</button>
                                     </div>
                                 </form>
                             </div>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">저장</button>
+                                        <button type="submit" class="btn btn-primary w-100">저장</button>
                                     </div>
                                 </form>
                             </div>
@@ -103,7 +103,8 @@
 </template>
 
 <script>
-import { useAlertStore } from '@/stores';
+import {  usePersonalStore, useAuthStore, useAlertStore } from '@/stores';
+import { storeToRefs } from 'pinia';
 
 export default {
     data() {
@@ -119,35 +120,39 @@ export default {
         this.select();
     },
     methods: {
-        select() {
-            this.axios.post('/employee/mypage', {
-                employeeId: 'test'
-            })
-                .then(response => {
-                    this.employee = response.data;
-                    this.deptName = response.data.department.deptName;
-                    this.positName = response.data.position.positionName;
-                }).catch(err => {
-                    console.log(err);
-                });
+        async select() {
+            const personalStore = usePersonalStore();
+            const authStore = useAuthStore();
+            const { user } = storeToRefs(authStore);
+            const { myInfo } = storeToRefs(personalStore);
+            const employeeId = user;
+            const datas = {
+                employeeId: employeeId.value.employeeId
+            }
+            
+            await personalStore.getMyInfo(datas);
+            this.employee = myInfo;
+            this.positName = this.employee.position.positionName;
+            this.deptName = this.employee.department.deptName;
+            
         },
         submit() {
+            const personalStore = usePersonalStore();
             const alertStore = useAlertStore();
-
-            this.axios.post('/employee/mypage/update', {
+            const { status } = storeToRefs(personalStore);
+            const datas = {
                 employeeId: this.employee.employeeId,
                 email: this.employee.email,
                 phone: this.employee.phone,
-                address: this.employee.email
-            })
-                .then(response => {
-                    this.employee = response.data;
-                    alertStore.success('저장되었습니다.');
-                })
-                .catch(err => {
-                    console.log(err);
-                    alertStore.error('오류가 발생했습니다.');
-                })
+                address: this.employee.address
+            }
+            personalStore.saveMyInfo(datas);
+            console.log(status.value);
+            if (status.value === 200) {
+                alertStore.success('저장 되었습니다.');
+            } else {
+                alertStore.error('오류가 발생했습니다.');
+            }
         },
         overviewTabClick() {
             this.overview = true;
