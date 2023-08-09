@@ -14,10 +14,8 @@
                                 <div class="col-md-6">
                                     <label class="form-label">부서</label>
                                     <select class="form-select" v-model="dept">
-                                        <option :value="department.deptCode" v-for="(department, i) in departmentList"
-                                            :key="i">
-                                            {{
-                                                department.deptName }}</option>
+                                        <option :value="department.deptCode" v-for="(department, i) in departmentList" :key="i">
+                                            {{ department.deptName }}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -28,8 +26,7 @@
                                     <label class="form-label">직위</label>
                                     <select class="form-select" v-model="posit">
                                         <option :value="position.positCode" v-for=" (position, i) in positionList" :key="i">
-                                            {{
-                                                position.positName }}</option>
+                                            {{ position.positName }}</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
@@ -103,8 +100,6 @@ export default {
         },
         submit() {
             const authStore = useAuthStore();
-
-            // const alertStore = useAlertStore;
             const datas = {
                 employeeId: this.id,
                 userPasswd: this.pwd,

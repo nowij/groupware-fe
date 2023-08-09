@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {  useAuthStore } from '@/stores';
+import { useAuthStore } from '@/stores';
 
 export default {
   setup() {

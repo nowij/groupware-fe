@@ -7,8 +7,8 @@
     </div>
     <nav>
       <div v-if="user">
-        <router-link to="/" class="p-2">Home</router-link>
-        <router-link to="/employee/mypage" class="p-2">마이페이지</router-link>
+        <router-link to="/gw" class="p-2">Home</router-link>
+        <router-link to="/gw/mypage" class="p-2">마이페이지</router-link>
         <router-link to="/employee/info" class="p-2">정보조회</router-link>
         <router-link to="/b" class="p-2">게시판</router-link>
         <router-link to="/c" class="p-2">전자결재</router-link>
@@ -18,7 +18,7 @@
     </nav>
   </header>
 </template>
-
+ç
 <script>
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';

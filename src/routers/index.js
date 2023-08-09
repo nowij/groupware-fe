@@ -1,23 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAlertStore, useAuthStore } from '@/stores';
 
-import Employee from '@/views/Employee.vue'
-import Main from '@/views/Main.vue';
 import accountRoute from './account.route';
-import employeeRoute from './employee.route';
+import personalRoute from './personal.route';
+import Employee from '@/views/Employee.vue'
 import Register from '@/views/Register.vue';
 
 const routes = [
   { ...accountRoute },
-  { ...employeeRoute },
+  { ...personalRoute },
   {
     path: '/employee/info',
     name: 'employee',
     component: Employee
-  },
-  {
-    path: '/',
-    component: Main
   },
   {
     path: '/auth/register',
@@ -36,7 +31,7 @@ router.beforeEach(async (to) => {
   alertStore.clear();
 
   // redirect to login page if not logged in and trying to access a restricted page 
-  const publicPages = ['/auth/login', '/auth/register'];
+  const publicPages = ['/auth/login'];
   const authRequired = !publicPages.includes(to.path);
   const authStore = useAuthStore();
 
@@ -46,7 +41,7 @@ router.beforeEach(async (to) => {
   console.log(authRequired && !authStore.user)
 
   if (authRequired && !authStore.user) {
-      authStore.returnUrl = to.fullPath;
-      return '/auth/login';
+    authStore.returnUrl = to.fullPath;
+    return '/auth/login';
   }
 })

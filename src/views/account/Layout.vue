@@ -15,6 +15,6 @@ import { router } from '@/routers';
 // 로그인 했을 때 home으로 리다이렉트
 const authStore = useAuthStore();
 if (authStore.user) {
-    router.push('/');
+    router.push('/gw');
 }
 </script>
