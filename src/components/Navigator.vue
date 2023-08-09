@@ -12,20 +12,39 @@
         <router-link to="/employee/info" class="p-2">정보조회</router-link>
         <router-link to="/b" class="p-2">게시판</router-link>
         <router-link to="/c" class="p-2">전자결재</router-link>
-        <router-link to="/auth/register" class="p-2">신규등록</router-link>
-        <a class="p-2" @click="authStore.logout()">로그아웃</a>
+        <router-link v-if="user.deptCode === '001'" to="/auth/register" class="p-2">신규등록</router-link>
+        <a class="p-2" @click="logout()">로그아웃</a>
       </div>
     </nav>
   </header>
 </template>
 
-<script setup>
+<script>
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
-const authStore = useAuthStore();
-const { user } = storeToRefs(authStore);
-console.log('확인');
-console.log(user);
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    return {
+      user: ref({})
+    }
+  },
+  created() {
+    this.isAdmin()
+  },
+  methods: {
+    async isAdmin() {
+      const authStore = useAuthStore();
+      const { user } = storeToRefs(authStore);
+      this.user = user;
+    },
+    logout() {
+      const authStore = useAuthStore();
+      return authStore.logout();
+    }
+  }
+}
 </script>
 
 <style>

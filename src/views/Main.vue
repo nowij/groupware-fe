@@ -12,12 +12,29 @@
     </div>
 </template>
 
-<script setup>
+<script>
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 
-const authStore = useAuthStore();
-const { user } = storeToRefs(authStore);
+export default {
+    setup() {
+        return {
+            user: ref({})
+        }
+    },
+    created() {
+        this.getUser()
+    },
+    methods: {
+        getUser() {
+            const authStore = useAuthStore();
+            const { user } = storeToRefs(authStore);
+            this.user = user;
+        }
+    }
+}
+
 
 </script>
 
