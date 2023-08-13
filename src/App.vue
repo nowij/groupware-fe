@@ -14,4 +14,5 @@ import { Nav, Alert } from '@/components';
 
 <style>
 @import '@/assets/style.css';
+@import '@/assets/bootstrap-icons.css'
 </style>

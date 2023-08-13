@@ -3,25 +3,53 @@
   <nav class="sidebar" v-if="user">
     <ul class="sidebar-nav">
       <li class="nav-item">
-        <router-link to="/gw" class="nav-link">Home</router-link>
+        <router-link to="/gw" class="nav-link">
+          <i class="bi bi-house"></i>
+          Home</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/gw/mypage" class="nav-link">마이페이지</router-link>
+        <router-link to="/gw/mypage" class="nav-link">
+          <i class="bi bi-person"></i>
+          마이페이지</router-link>
+      </li>
+      <li class="nav-item" @click="navAttendance">
+        <a class="nav-link">
+          <i class="bi bi-briefcase"></i>
+          <span>근태관리</span>
+        </a>
+        <ul id="nav-attendance" class="nav-content">
+          <li>
+            <router-link to="/att/workingDay">근무시간</router-link>
+          </li>
+          <li>
+            <router-link to="/att/vaction">휴가</router-link>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
-        <router-link to="/employee/info" class="nav-link">정보조회</router-link>
+        <router-link to="/employee/info" class="nav-link">
+          <i class="bi bi-search"></i>
+          정보조회</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/b" class="nav-link">게시판</router-link>
+        <router-link to="/b" class="nav-link">
+          <i class="bi bi-card-list"></i>
+          게시판</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/c" class="nav-link">전자결재</router-link>
+        <router-link to="/c" class="nav-link">
+          <i class="bi bi-file-earmark-text"></i>
+          전자결재</router-link>
       </li>
       <li class="nav-item">
-        <router-link v-if="user.deptCode === '001'" to="/auth/register" class="nav-link">신규등록</router-link>
+        <router-link v-if="user.deptCode === '001'" to="/auth/register" class="nav-link">
+          <i class="bi bi-person-plus"></i>
+          신규등록</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" @click="logout()">로그아웃</a>
+        <a class="nav-link" @click="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+          로그아웃</a>
       </li>
     </ul>
   </nav>
@@ -31,11 +59,13 @@
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import $ from 'jquery';
 
 export default {
   setup() {
     return {
-      user: ref({})
+      user: ref({}),
+      attendance: ref(false)
     }
   },
   created() {
@@ -51,6 +81,15 @@ export default {
       const authStore = useAuthStore();
       return authStore.logout();
     },
+    navAttendance() {
+      this.attendance = !this.attendance;
+      if (this.attendance) {
+        $("#nav-attendance").css("display", "block");
+      }
+      else {
+        $("#nav-attendance").css("display", "none");
+      }
+    }
   }
 }
 </script>
@@ -60,18 +99,8 @@ nav {
   padding: 30px;
 }
 
-/* nav a {
-  font-weight: bold;
-  color: #2c3e50;
-} */
-
-/* .router-link-active {
-  color: #012970;
-  background: #4154f1;
+#nav-attendance {
+  display: none;
 }
 
-.router-link-exact-active {
-  color: #012970;
-  background: #4154f1;
-} */
 </style>

@@ -11,6 +11,7 @@
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "jquery": "^3.7.0",
     "pinia": "^2.1.6",
     "vee-validate": "^4.11.0",
     "vue": "^3.2.13",
