@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useAuthStore } from "./stores";
 
-const baseUrl = 'http://localhost:8080';
-
 export const axiosWrapper = {
     get: request('GET'),
     post: request('POST'),
@@ -15,7 +13,7 @@ function request(method) {
         const requestOptions = {
             method: method,
             headers: authHeader(),
-            url: baseUrl+url
+            url: url
         };
 
         if (body) {

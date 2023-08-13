@@ -4,8 +4,6 @@ import { router } from '@/routers';
 import { useAlertStore } from '@/stores';
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:8080';
-
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
@@ -15,7 +13,7 @@ export const useAuthStore = defineStore({
     actions: {
         async login(id, pwd) {
             try {
-                axios.post(`${baseUrl}/auth/login`, {
+                axios.post('/auth/login', {
                     employeeId: id,
                     userPasswd: pwd
                 }).then(res => {
@@ -37,7 +35,7 @@ export const useAuthStore = defineStore({
         },
         async register(param) {
             try {
-                axios.post(`${baseUrl}/auth/register`, param)
+                axios.post('/auth/register', param)
                     .catch(err => {
                         console.log(err);
                     });
