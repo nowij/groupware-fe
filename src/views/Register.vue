@@ -1,6 +1,4 @@
 <template>
-    <div class="container">
-        <div class="row">
             <div class="col-sm-8 offset-sm-2 mt-5">
                 <div class="row justify-content-center">
                     <div class="card mb-3">
@@ -30,6 +28,10 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
+                                    <label class="form-label">입사일</label>
+                                    <Datepicker class="form-control" v-model="picked" :locale="locale" :input-format="format"/>
+                                </div>
+                                <div class="col-12">
                                     <label class="form-label">비밀번호</label>
                                     <input type="password" class="form-control" v-model="pwd">
                                 </div>
@@ -56,17 +58,26 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+
 </template>
 
 <script>
 import { useCommonStore, useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
+import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
+
 
 export default {
+    components: {
+        Datepicker
+    },
     setup() {
+        const locale = reactive(ko)
+        const picked = ref(new Date())
+        const format = ref('yyyy-MM-dd')
         return {
             departmentList: ref([]),
             positionList: ref([]),
@@ -77,7 +88,10 @@ export default {
             name: ref(''),
             email: ref(''),
             phone: ref(''),
-            addr: ref('')
+            addr: ref(''),
+            locale,
+            picked,
+            format
         }
     },
     mounted() {

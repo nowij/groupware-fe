@@ -42,7 +42,8 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
+  margin-top: 20px;
+  margin-left: 150px;
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -603,10 +604,10 @@ h6 {
 --------------------------------------------------------------*/
 .sidebar {
   position: fixed;
-  top: 60px;
+  top: 0px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 150px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -686,9 +687,10 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #012970;
   transition: 0.3;
-  background: #f6f9ff;
+  background: #fff;
+  /* background: #f6f9ff; */
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -696,15 +698,15 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
-}
-
-.sidebar-nav .nav-link.collapsed {
   color: #012970;
-  background: #fff;
 }
 
-.sidebar-nav .nav-link.collapsed i {
+.sidebar-nav .nav-link.router-link-active.router-link-exact-active {
+  color: #4154f1;
+  background: #f6f9ff;
+}
+
+.sidebar-nav .nav-link.router-link-active.router-link-exact-active i {
   color: #899bbd;
 }
 
@@ -1000,7 +1002,7 @@ h6 {
 # Profie Page
 --------------------------------------------------------------*/
 .profile .profile-card img {
-  max-width: 120px;
+  max-width: 100px;
 }
 
 .profile .profile-card h2 {
@@ -1012,19 +1014,6 @@ h6 {
 
 .profile .profile-card h3 {
   font-size: 18px;
-}
-
-.profile .profile-card .social-links a {
-  font-size: 20px;
-  display: inline-block;
-  color: rgba(1, 41, 112, 0.5);
-  line-height: 0;
-  margin-right: 10px;
-  transition: 0.3s;
-}
-
-.profile .profile-card .social-links a:hover {
-  color: #012970;
 }
 
 .profile .profile-overview .row {

@@ -1,24 +1,32 @@
 <template>
-  <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block">GroupWare</span>
-      </a>
-    </div>
-    <nav>
-      <div v-if="user">
-        <router-link to="/gw" class="p-2">Home</router-link>
-        <router-link to="/gw/mypage" class="p-2">마이페이지</router-link>
-        <router-link to="/employee/info" class="p-2">정보조회</router-link>
-        <router-link to="/b" class="p-2">게시판</router-link>
-        <router-link to="/c" class="p-2">전자결재</router-link>
-        <router-link v-if="user.deptCode === '001'" to="/auth/register" class="p-2">신규등록</router-link>
-        <a class="p-2" @click="logout()">로그아웃</a>
-      </div>
-    </nav>
-  </header>
+  <!-- home, 전자결재, 근태관리, 주소록, 예약, 게시판, 관리자기능 -->
+  <nav class="sidebar" v-if="user">
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <router-link to="/gw" class="nav-link">Home</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/gw/mypage" class="nav-link">마이페이지</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/employee/info" class="nav-link">정보조회</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/b" class="nav-link">게시판</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/c" class="nav-link">전자결재</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link v-if="user.deptCode === '001'" to="/auth/register" class="nav-link">신규등록</router-link>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" @click="logout()">로그아웃</a>
+      </li>
+    </ul>
+  </nav>
 </template>
-ç
+
 <script>
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
@@ -42,7 +50,7 @@ export default {
     logout() {
       const authStore = useAuthStore();
       return authStore.logout();
-    }
+    },
   }
 }
 </script>
@@ -52,12 +60,18 @@ nav {
   padding: 30px;
 }
 
-nav a {
+/* nav a {
   font-weight: bold;
   color: #2c3e50;
+} */
+
+/* .router-link-active {
+  color: #012970;
+  background: #4154f1;
 }
 
-nav a.router-link-exact-active {
-  color: #4154f1;
-}
+.router-link-exact-active {
+  color: #012970;
+  background: #4154f1;
+} */
 </style>
