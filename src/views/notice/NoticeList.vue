@@ -3,10 +3,10 @@
         <form>
             <div class="d-flex pt-2 pb-5 justify-content-center">
                 <div class="me-1">
-                    <input type="text" placeholder="제목" class="form-control" >
+                    <input type="text" placeholder="제목" class="form-control">
                 </div>
                 <div class="me-1">
-                    <input type="text" placeholder="작성자" class="form-control" >
+                    <input type="text" placeholder="작성자" class="form-control">
                 </div>
                 <div class="me-1">
                     <button type="submit" class="btn btn-outline-secondary me-1" @click.self.prevent="search">검색</button>
@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(notice, i) in noticeList" :key="i" id="noticeBody">
+                <tr v-for="(notice, i) in notices" :key="i" id="noticeBody">
                     <td :class="[notice.fixedYn == 'Y' ? 'fixedY' : '']"> {{ notice.noticeNo }}</td>
                     <td :class="[notice.fixedYn == 'Y' ? 'fixedY' : '']">{{ notice.title }}</td>
                     <td :class="[notice.fixedYn == 'Y' ? 'fixedY' : '']">{{ notice.employeeName }}</td>
@@ -35,37 +35,35 @@
                 </tr>
             </tbody>
         </table>
-    </div>   
-    <div id="btnArea">
+    </div>
+    <div id="btnArea" v-if="user && user.deptCode === '001'">
         <router-link to="/notice/form" class="btn btn-outline-secondary">등록</router-link>
     </div>
 </template>
 
-<script>
-import { useNoticeStore } from '@/stores'
+<script setup>
+import { useNoticeStore, useAuthStore } from '@/stores'
 import { storeToRefs } from 'pinia';
+import { onMounted, watch } from 'vue';
 
-export default {
-    setup() {
-        const noticeList = []
-        return {
-            noticeList
-        }
-    },
-    created() {
-        this.getList();
-    },
-    methods: {
-        async getList() {
-            const noticeStore = useNoticeStore();
-            const { notices } = storeToRefs(noticeStore);
+const noticeStore = useNoticeStore();
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+const { notices } = storeToRefs(noticeStore);
 
-            noticeStore.getNotices()
-            this.noticeList = notices;
-        }
-    }
+onMounted(() => {
+    getList();
+})
+
+const getList = () => {
+    noticeStore.getNotices()
+    console.log(notices)
 }
-</script>
+
+watch(() => getList)
+
+</script >
+
 
 <style>
 #noticeBody td.fixedY {
