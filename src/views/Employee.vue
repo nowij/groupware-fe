@@ -139,13 +139,3 @@ export default {
     }
 }
 </script>
-
-<style>
-#searchArea select {
-    width: 6rem;
-}
-
-#searchArea input {
-    width: 10rem;
-}
-</style>
