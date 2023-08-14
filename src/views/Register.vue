@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">입사일</label>
-                                    <Datepicker class="form-control" v-model="picked" :locale="locale" :input-format="format"/>
+                                    <Datepicker class="form-control" v-model="joinDate" :locale="locale" :input-format="format"/>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">비밀번호</label>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { useCommonStore, useAuthStore } from '@/stores';
+import { useCommonStore, useAuthStore, useEmployeeStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import { reactive, ref } from 'vue';
 import Datepicker from 'vue3-datepicker'
@@ -76,7 +76,7 @@ export default {
     },
     setup() {
         const locale = reactive(ko)
-        const picked = ref(new Date())
+        const joinDate = ref(new Date())
         const format = ref('yyyy-MM-dd')
         return {
             departmentList: ref([]),
@@ -90,12 +90,13 @@ export default {
             phone: ref(''),
             addr: ref(''),
             locale,
-            picked,
+            joinDate,
             format
         }
     },
     mounted() {
-        this.setCommon()
+        this.setCommon(),
+        this.setNewId()
     },
     computed: {
         fullEmail() {
@@ -112,6 +113,13 @@ export default {
             this.positionList = positions.value;
             this.departmentList = departments.value;
         },
+        async setNewId() {
+            const employeeStore = useEmployeeStore();
+            const { id } = storeToRefs(employeeStore);
+
+            await employeeStore.selectNewId();
+            this.id = id;
+        },
         submit() {
             const authStore = useAuthStore();
             const datas = {
@@ -127,7 +135,8 @@ export default {
                 position: {
                     positionCode: this.posit
                 },
-                activeYn: 'Y'
+                activeYn: 'Y',
+                joinDate: this.joinDate
             }
 
             authStore.register(datas);
