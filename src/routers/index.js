@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAlertStore, useAuthStore } from '@/stores';
 
-import accountRoute from './account.route';
-import personalRoute from './personal.route';
+import accountRoutes from './account.route';
+import personalRoutes from './personal.route';
+import noticeRoutes from './notice.route';
 import Employee from '@/views/Employee.vue'
 import Register from '@/views/Register.vue';
 
 const routes = [
-  { ...accountRoute },
-  { ...personalRoute },
+  { ...accountRoutes },
+  { ...personalRoutes },
+  { ...noticeRoutes },
   {
     path: '/employee/info',
     name: 'employee',

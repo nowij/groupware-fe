@@ -32,9 +32,9 @@
           정보조회</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/b" class="nav-link">
+        <router-link to="/notice" class="nav-link">
           <i class="bi bi-card-list"></i>
-          게시판</router-link>
+          공지사항</router-link>
       </li>
       <li class="nav-item">
         <router-link to="/c" class="nav-link">

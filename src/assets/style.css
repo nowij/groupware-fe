@@ -43,7 +43,7 @@ h6 {
 --------------------------------------------------------------*/
 #main {
   margin-top: 20px;
-  margin-left: 170px;
+  margin-left: 200px;
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -257,7 +257,8 @@ h6 {
 
 /* Alerts */
 .alert {
-  top:55px; 
+  width: 70rem;
+  margin: auto;
 }
 
 .alert-heading {
@@ -607,7 +608,7 @@ h6 {
   top: 0px;
   left: 0;
   bottom: 0;
-  width: 170px;
+  width: 200px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -770,6 +771,22 @@ h6 {
 
 #searchArea input {
   width: 10rem;
+}
+
+/*--------------------------------------------------------------
+# btnArea
+--------------------------------------------------------------*/
+#btnArea {
+  float: right;
+}
+
+#btnArea button {
+  float: right;
+  margin-right: .5rem;
+}
+
+#formBody {
+  width: 70rem;
 }
 
 /*--------------------------------------------------------------
