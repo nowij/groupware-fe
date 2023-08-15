@@ -4,13 +4,17 @@ import { useAlertStore, useAuthStore } from '@/stores';
 import accountRoutes from './account.route';
 import personalRoutes from './personal.route';
 import noticeRoutes from './notice.route';
+import attendanceRoutes from './attendance.route';
+
 import Employee from '@/views/Employee.vue'
 import Register from '@/views/Register.vue';
+
 
 const routes = [
   { ...accountRoutes },
   { ...personalRoutes },
   { ...noticeRoutes },
+  { ...attendanceRoutes },
   {
     path: '/employee/info',
     name: 'employee',

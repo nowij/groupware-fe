@@ -19,7 +19,7 @@
         </a>
         <ul id="nav-attendance" class="nav-content">
           <li>
-            <router-link to="/att/workingDay">근무시간</router-link>
+            <router-link to="/att/workd">근무시간</router-link>
           </li>
           <li>
             <router-link to="/att/vaction">휴가</router-link>
