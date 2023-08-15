@@ -36,8 +36,8 @@
             </tbody>
         </table>
     </div>
-    <div id="btnArea" v-if="user && user.deptCode === '001'">
-        <router-link to="/notice/form" class="btn btn-outline-secondary">등록</router-link>
+    <div id="btnArea" v-if="user">
+        <router-link to="/notice/form" class="btn btn-outline-secondary" v-if="user.deptCode === '001'">등록</router-link>
     </div>
 </template>
 
@@ -57,7 +57,6 @@ onMounted(() => {
 
 const getList = () => {
     noticeStore.getNotices()
-    console.log(notices)
 }
 
 watch(() => getList)

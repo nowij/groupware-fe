@@ -5,13 +5,14 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">제목</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="subject"/>
+                    <input type="text" class="form-control" v-model="title" />
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">상단고정</label>
                 <div class="col-sm-10">
-                    <input type="checkbox" class="form-check-input" id="fixedYn" true-value="Y" false-value="N" v-model="checked"/>
+                    <input type="checkbox" class="form-check-input" id="fixedYn" true-value="Y" false-value="N"
+                        v-model="checked" />
                 </div>
             </div>
             <div class="row mb-3">
@@ -27,60 +28,45 @@
                 </div>
             </div>
             <div id="btnArea">
-                <button type="submit" class="btn btn-primary" @click.self.prevent="submit">저장</button>
+                <button type="submit" class="btn btn-primary" @click.self.prevent="doSubmit">저장</button>
             </div>
         </form>
     </div>
 </template>
 
-<script>
-import { useAuthStore, useNoticeStore, useAlertStore } from '@/stores';
-import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+<script setup>
+import { useAuthStore, useNoticeStore, useAlertStore } from '@/stores'
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 
-export default {
-    setup() {
-        const user = {};
-        const subject = ref('');
-        const content = ref('');
-        const checked = false;
-        return {
-            user,
-            subject,
-            content,
-            checked
-        }
-    },
-    created() {
-        this.getUser()
-    },
-    methods: {
-        getUser() {
-            const authStore = useAuthStore();
-            const { user } = storeToRefs(authStore);
-            this.user = user;
-        },
-        submit() {
-            const noticeStore = useNoticeStore();
-            const { status } = storeToRefs(noticeStore);
-            const alertStore = useAlertStore();
-            
-            if (this.chekced) {
-                this.checked = 'Y'
-            } else if (!this.checked) {
-                this.checked = 'N'
-            }
-            const datas = {
-                title: this.subject,
-                content: this.content,
-                employeeId: this.user.employeeId,
-                fixedYn: this.checked
-            }
-            noticeStore.saveNotice(datas);
-            if (status.value === 200) {
-                alertStore.success('저장되었습니다.');
-            }
-        }
+const authStore = useAuthStore()
+const noticeStore = useNoticeStore()
+const alertStore = useAlertStore()
+const { user } = storeToRefs(authStore)
+const { status } = storeToRefs(noticeStore)
+const title = ref('')
+const content = ref('')
+const checked = ref(false)
+
+// methods
+const doSubmit = () => {
+    if (checked.value) {
+        checked.value = 'Y'
+    } else if (!checked.value) {
+        checked.value = 'N'
+    }
+
+    const datas = {
+        title: title.value,
+        content: content.value,
+        employeeId: user.value.employeeId,
+        fixedYn: checked.value
+    }
+    
+    noticeStore.saveNotice(datas);
+    if (status.value === 200) {
+        alertStore.success('저장되었습니다.');
     }
 }
+
 </script>

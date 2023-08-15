@@ -11,29 +11,31 @@
                 <div class="me-1">
                     <select class="form-select" v-model="searchDept" @change="selectValue">
                         <option value="" selected>부서</option>
-                        <option v-for="(department, i) in departmentList" :key="i" :value="department.deptCode">{{
-                            department.deptName }}</option>
+                        <option v-for="(department, i) in departments" :key="i" :value="department.deptCode">
+                            {{ department.deptName }}
+                        </option>
                     </select>
                 </div>
                 <div class="me-1">
                     <select class="form-select" v-model="searchPosit" @change="selectValue">
                         <option value="" selected>직위</option>
-                        <option v-for="(position, i) in positionList" :key="i" :value="position.positCode">{{
-                            position.positName }}</option>
+                        <option v-for="(position, i) in positions" :key="i" :value="position.positCode">
+                            {{ position.positName }}
+                        </option>
                     </select>
                 </div>
                 <div class="me-1">
                     <input type="text" placeholder="전화번호" class="form-control" v-model="searchPhone">
                 </div>
                 <div class="me-1">
-                    <select class="form-select" v-model="searchActive">
+                    <select class="form-select" v-model="activeYn">
                         <option value="Y" selected>재직</option>
                         <option value="N">퇴사</option>
                     </select>
                 </div>
                 <div class="me-1">
-                    <button type="submit" class="btn btn-outline-secondary me-1" @click.self.prevent="search">검색</button>
-                    <button class="btn btn-outline-secondary" @click="reset">초기화</button>
+                    <button type="submit" class="btn btn-outline-secondary me-1" @click.self.prevent="doSearch">검색</button>
+                    <button class="btn btn-outline-secondary" @click="doReset">초기화</button>
                 </div>
             </div>
         </form>
@@ -54,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(employee, i) in employeeList" :key="i">
+                <tr v-for="(employee, i) in employees" :key="i">
                     <td>{{ employee.employeeId }}</td>
                     <td>{{ employee.userName }}</td>
                     <td>{{ employee.department.deptName }}</td>
@@ -69,73 +71,60 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { useEmployeeStore, useCommonStore } from '@/stores';
 import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 import { ref } from 'vue';
 
-export default {
-    setup() {
-        return {
-            employeeList: [],
-            positionList: [],
-            departmentList: ref([]),
+const employeeStore = useEmployeeStore();
+const commonStore = useCommonStore();
+const { employees } = storeToRefs(employeeStore);
+const { positions, departments } = storeToRefs(commonStore);
+const searchId = ref('')
+const searchName = ref('')
+const searchPhone = ref('')
+const searchPosit = ref('')
+const searchDept = ref('')
+const activeYn = ref('Y')
 
-            searchId: ref(null),
-            searchName: ref(null),
-            searchPhone: ref(null),
-            searchActive: ref('Y'),
-            searchDept: ref(''),
-            searchPosit: ref('')
-        }
-    },
-    mounted() {
-        this.get();
-        this.setCommon();
-    },
-    methods: {
-        async get() {
-            const employeeStore = useEmployeeStore();
-            const { employees } = storeToRefs(employeeStore);
+onMounted(() => {
+    getList(),
+    getCommon()
+})
 
-            await employeeStore.getEmployees()
-            this.employeeList = employees;
+// methods
+const getList = () => {
+    employeeStore.getEmployees()
+}
+
+const getCommon = () => {
+    commonStore.getPositions();
+    commonStore.getDepartments();
+}
+
+const doSearch = () => {
+    const searchParams = {
+        employeeId: searchId.value,
+        userName: searchName.value,
+        phone: searchPhone.value,
+        activeYn: activeYn.value,
+        position: {
+            positionCode: searchPosit.value
         },
-        async setCommon() {
-            const commonStore = useCommonStore();
-            const { positions, departments } = storeToRefs(commonStore);
-
-            await commonStore.getPositions();
-            await commonStore.getDepartments();
-            this.positionList = positions;
-            this.departmentList = departments.value;
-            console.log("common >>> ")
-            console.log(this.departmentList)
+        department: {
+            deptCode: searchDept.value
         },
-        async search() {
-            const searchParams = {
-                employeeId: this.searchId,
-                userName: this.searchName,
-                phone: this.searchPhone,
-                activeYn: this.searchActive,
-                positionCode: this.searchPosit,
-                deptCode: this.searchDept,
-            }
-
-            const employeeStore = useEmployeeStore();
-            const { employees } = storeToRefs(employeeStore);
-
-            await employeeStore.selectEmployee(searchParams);
-            this.employeeList = employees.value;
-        },
-        reset() {
-            this.searchId = '';
-            this.searchName = '';
-            this.searchPhone = '';
-            this.searchDept = '';
-            this.searchPosit = '';
-            this.searchActive = 'Y';
-        }
     }
+   employeeStore.selectEmployee(searchParams);
+}
+
+const doReset = () => {
+    searchId.value = ''
+    searchName.value = ''
+    searchPhone.value = ''
+    searchPosit.value = ''
+    searchDept.value = ''
+    activeYn.value = ''
 }
 </script>
