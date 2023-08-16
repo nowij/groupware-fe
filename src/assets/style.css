@@ -763,6 +763,32 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# fullCalendar
+--------------------------------------------------------------*/
+/* 공휴일 */
+.fc-scrollgrid-sync-inner a {
+  color: black;
+}
+.fc .fc-bg-event {
+  background: #b1b1b1;
+  color: black;
+  font-weight: bold
+}
+/* 일요일 */
+.fc-day.fc-day-sun.fc-daygrid-day {
+  background: #b1b1b1;
+}
+.fc-day.fc-day-sun.fc-daygrid-day a {
+  color: red;
+}
+/* 토요일 */
+.fc-day.fc-day-sat.fc-daygrid-day {
+  background: #b1b1b1;
+}
+.fc-day.fc-day-sat.fc-daygrid-day a {
+  color: blue;
+}
+/*--------------------------------------------------------------
 # searchArea
 --------------------------------------------------------------*/
 #searchArea select {

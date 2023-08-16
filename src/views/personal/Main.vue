@@ -1,9 +1,11 @@
 <template>
     <!-- 사용자 정보 -->
     <div>
-        <h2>메인페이지</h2>
+        <h2>Main</h2>
         <div>
-            {{ user }} Login!
+            <div>
+                {{ user.userName }} Logined
+            </div>
         </div>
     </div>
     <!-- 공지사항 -->
