@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="card-title">근무시간</h3>
+    <h4 class="card-hedaer">근무시간 입력</h4>
   </div>
   <div id="workingDayArea">
     <FullCalendar ref="fullCalendar" :options="calendarOptions" />
@@ -12,14 +12,17 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import googleCalendarPlugin from '@fullcalendar/google-calendar'
 import { onMounted, ref } from 'vue'
-import { useAuthStore } from '@/stores'
+import { useAuthStore, useAlertStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
+import $ from 'jquery'
 
 const fullCalendar = ref(null)
 const date = new Date()
-const authStore = useAuthStore();
+const alertStore = useAlertStore()
+const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
+
 const holiday = []
 const apiKey = 'AIzaSyA3CdSUz-R3AStzjv4WRjER8Ulw59FwBIc'
 const day = date.getDate()
@@ -28,6 +31,7 @@ const year = date.getFullYear()
 
 onMounted(() => {
   getHoilDay(year, month)
+  setDisableBtn(day)
 })
 
 const calendarOptions = {
@@ -44,7 +48,7 @@ const calendarOptions = {
     }],
   weekends: false,
   customButtons: {
-    workingDayButton: {
+    workingDay: {
       text: '근무시간입력',
       click: function () {
         if (day <= 17 && day > 15) {
@@ -52,21 +56,42 @@ const calendarOptions = {
         } else if (day <= 3) {
           // 16
           setSecondWorkDay(year, month, day)
+        } else {
+          alertStore.error('입력 기간이 아닙니다')
         }
       },
     },
-    saveButton: {
-      text: '저장'
+    save: {
+      text: '저장',
+      click: function() {
+        $(".fc-approve-button").show()
+      }
+    },
+    approve: {
+      text: '승인요청',
     }
   },
   headerToolbar: {
     left: 'prev next',
     center: 'title',
-    right: 'today workingDayButton saveButton'
+    right: 'today workingDay save approve'
   }
 }
 
 // methods
+const setDisableBtn = (d) => {
+  const isDisable = d <= 3 ? true : (d <= 17 && d > 15 ? true : false)
+
+  if (!isDisable) {
+    $(".fc-workingDay-button").attr('disabled', true)
+    $(".fc-save-button").attr('disabled', true)
+  } else {
+    $(".fc-workingDay-button").attr('disabled', false)
+    $(".fc-save-button").attr('disabled', false)
+  }
+  $(".fc-approve-button").hide()
+}
+
 const setFirstWorkDay = (y, m, d) => {
   const date = `${y}${m}${d}`
   const calendarApi = fullCalendar.value.getApi()
