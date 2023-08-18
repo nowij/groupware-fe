@@ -5,7 +5,8 @@ export const useEmployeeStore = defineStore({
     id: 'employee',
     state: () => ({
         employees: {},
-        id: ''
+        id: '',
+        status: 0
     }),
     actions: {
         async getEmployees() {
@@ -28,6 +29,15 @@ export const useEmployeeStore = defineStore({
             try {
                 const response = await axiosWrapper.get('/employee/newId');
                 this.id = response.data;
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async deleteEmployee(param) {
+            try {
+                const response = await axiosWrapper.delete(`/employee/delete/${param}`)
+                this.status = response.status
+                this.employees = this.employees.filter(x => x.employeeId !== param)
             } catch (error) {
                 console.log(error)
             }

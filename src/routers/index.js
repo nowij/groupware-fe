@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAlertStore, useAuthStore } from '@/stores';
 
-import accountRoutes from './account.route';
-import personalRoutes from './personal.route';
-import noticeRoutes from './notice.route';
-import attendanceRoutes from './attendance.route';
+import accountRoutes from './account.route'
+import personalRoutes from './personal.route'
+import noticeRoutes from './notice.route'
+import attendanceRoutes from './attendance.route'
+import employeeRoutes from './employee.route'
 
-import Employee from '@/views/Employee.vue'
-import Register from '@/views/Register.vue';
+import Register from '@/views/Register.vue'
 
 
 const routes = [
@@ -15,11 +15,7 @@ const routes = [
   { ...personalRoutes },
   { ...noticeRoutes },
   { ...attendanceRoutes },
-  {
-    path: '/employee/info',
-    name: 'employee',
-    component: Employee
-  },
+  { ...employeeRoutes },
   {
     path: '/auth/register',
     component: Register

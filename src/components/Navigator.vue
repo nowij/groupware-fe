@@ -27,9 +27,10 @@
         </ul>
       </li>
       <li class="nav-item">
-        <router-link to="/employee/info" class="nav-link">
+        <router-link to="/employee" class="nav-link">
           <i class="bi bi-search"></i>
-          정보조회</router-link>
+          <span v-if="user.deptCode != '001'">정보조회</span>
+          <span v-else-if="user.deptCode === '001'">직원관리</span></router-link>
       </li>
       <li class="nav-item">
         <router-link to="/notice" class="nav-link">

@@ -65,6 +65,10 @@
                     <td>{{ employee.email }}</td>
                     <td v-if="employee.activeYn === 'Y'">재직</td>
                     <td v-else-if="employee.activeYn === 'N'">퇴사</td>
+                    <td>
+                        <button class="btn btn-outline-success m-2" @click="doUpdate">수정</button>
+                        <button class="btn btn-outline-danger" @click="doDelete(employee.employeeId)">삭제</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -72,14 +76,15 @@
 </template>
 
 <script setup>
-import { useEmployeeStore, useCommonStore } from '@/stores';
+import { useEmployeeStore, useCommonStore, useAlertStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
 
-const employeeStore = useEmployeeStore();
-const commonStore = useCommonStore();
-const { employees } = storeToRefs(employeeStore);
+const employeeStore = useEmployeeStore()
+const commonStore = useCommonStore()
+const alertStore = useAlertStore()
+const { employees, status } = storeToRefs(employeeStore);
 const { positions, departments } = storeToRefs(commonStore);
 const searchId = ref('')
 const searchName = ref('')
@@ -126,5 +131,16 @@ const doReset = () => {
     searchPosit.value = ''
     searchDept.value = ''
     activeYn.value = ''
+}
+
+const doDelete = (id) => {
+    employeeStore.deleteEmployee(id)
+    if (status.value === 200) {
+        alertStore.success('삭제됐습니다')
+    }
+}
+
+const doUpdate = () => {
+    alertStore.success('수정됐습니다')
 }
 </script>
