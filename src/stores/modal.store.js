@@ -3,13 +3,13 @@ import { defineStore } from "pinia";
 export const useModalStore = defineStore({
     id: 'modal',
     state: () => ({
-        detailMdl: false
+        detailMdl: false,
+        id : null
     }),
     actions: {
-        open() {
-            console.log(this.detailMdl)
-            this.detailMdl = !this.detailMdl
-            console.log(this.detailMdl)
+        open(id) {
+            this.detailMdl = true
+            this.id = id
         }
     }
 });

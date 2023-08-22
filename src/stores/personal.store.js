@@ -8,13 +8,14 @@ export const usePersonalStore = defineStore({
         status: ''
     }),
     actions: {
-        async getMyInfo(param) {
-            const response = await axiosWrapper.post('/employee/mypage', param);
+        async selectInfo(param) {
+            console.log(this.myInfo)
+            const response = await axiosWrapper.post('/personal/info', param);
             this.myInfo = response.data;
         },
-        async saveMyInfo(param) {
-            const response = await axiosWrapper.post('/employee/mypage/update', param);
+        async saveInfo(param) {
+            const response = await axiosWrapper.put('/personal/info/save', param);
             this.status = response.status;
-        }
+        },
     }
 })

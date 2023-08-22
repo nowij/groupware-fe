@@ -40,7 +40,7 @@
             </div>
         </form>
     </div>
-
+    <EmployeeDetail v-if="detailMdl == true"/>
     <div>
         <h5 class="card-title">직원 조회</h5>
         <table class="table table-striped text-center">
@@ -66,8 +66,8 @@
                     <td v-if="employee.activeYn === 'Y'">재직</td>
                     <td v-else-if="employee.activeYn === 'N'">퇴사</td>
                     <td>
-                        <button class="btn btn-outline-success m-2" @click="modalStore.open()">수정</button>
-                        <button class="btn btn-outline-danger" @click="doDelete(employee.employeeId)">삭제</button>
+                        <button class="btn btn-outline-success m-2" @click="modalStore.open(employee.employeeId)">수정</button>
+                        <button class="btn btn-outline-danger" @click="doDelete(employee.employeeId)">퇴사</button>
                     </td>
                 </tr>
             </tbody>
@@ -76,6 +76,7 @@
 </template>
 
 <script setup>
+import { EmployeeDetail } from '@/views/employee';
 import { useEmployeeStore, useCommonStore, useAlertStore, useModalStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
@@ -85,8 +86,9 @@ const employeeStore = useEmployeeStore()
 const commonStore = useCommonStore()
 const alertStore = useAlertStore()
 const modalStore = useModalStore()
-const { employees, status } = storeToRefs(employeeStore);
-const { positions, departments } = storeToRefs(commonStore);
+const { detailMdl } = storeToRefs(modalStore)
+const { employees, status } = storeToRefs(employeeStore)
+const { positions, departments } = storeToRefs(commonStore)
 
 const searchId = ref('')
 const searchName = ref('')
@@ -123,7 +125,7 @@ const doSearch = () => {
             deptCode: searchDept.value
         },
     }
-   employeeStore.selectEmployee(searchParams);
+    employeeStore.selectEmployee(searchParams);
 }
 
 const doReset = () => {

@@ -41,6 +41,15 @@ export const useEmployeeStore = defineStore({
             } catch (error) {
                 console.log(error)
             }
+        },
+        async saveInfoOnByAdmin(param, id) {
+            try {
+                const response = await axiosWrapper.put(`/employee/save/${id}`, param)
+                this.status = response.status
+            } catch (error) {
+                console.log(error)
+            }
+            
         }
     }
 });

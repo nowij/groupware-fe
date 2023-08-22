@@ -115,9 +115,8 @@ import { ref, onMounted } from 'vue';
 const personalStore = usePersonalStore()
 const authStore = useAuthStore()
 const alertStore = useAlertStore()
-const { status } = storeToRefs(personalStore)
 const { user } = storeToRefs(authStore)
-const { myInfo } = storeToRefs(personalStore)
+const { myInfo, status } = storeToRefs(personalStore)
 const overview = ref(true)
 const changpw = ref(false)
 
@@ -130,7 +129,7 @@ const select = async () => {
     const datas = {
         employeeId: user.value.employeeId
     }
-    await personalStore.getMyInfo(datas);
+    await personalStore.selectInfo(datas);
 }
 
 const submit = async () => {
@@ -140,7 +139,7 @@ const submit = async () => {
         phone: myInfo.value.phone,
         address: myInfo.value.address
     }
-    await personalStore.saveMyInfo(datas);
+    await personalStore.saveInfo(datas);
 
     if (status.value === 200) {
         alertStore.success('저장 되었습니다.');

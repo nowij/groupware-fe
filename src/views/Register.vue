@@ -64,7 +64,6 @@
 import { useCommonStore, useAuthStore, useEmployeeStore } from '@/stores';
 import { storeToRefs } from 'pinia'
 import { computed, onMounted, reactive, ref } from 'vue'
-import Datepicker from 'vue3-datepicker'
 import { ko } from 'date-fns/locale'
 
 const authStore = useAuthStore();
