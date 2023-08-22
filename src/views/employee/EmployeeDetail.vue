@@ -62,6 +62,7 @@
 import { storeToRefs } from 'pinia';
 import { useModalStore, usePersonalStore,useCommonStore, useAlertStore, useEmployeeStore } from '@/stores';
  import { onMounted } from 'vue';
+import { router } from '@/routers';
 // import { ko } from 'date-fns/locale'
 
 // const locale = reactive(ko)
@@ -114,6 +115,7 @@ const submit = async () => {
     }
     await employeeStore.saveInfoOnByAdmin(data, employeeId)
     if (status.value == 200) {
+        router.go()
         alertStore.success("저장됐습니다.");
     }
 }

@@ -3,7 +3,7 @@
     <div>
         <h2>Main</h2>
         <div>
-            <div>
+            <div v-if="user">
                 {{ user.userName }} Logined
             </div>
         </div>

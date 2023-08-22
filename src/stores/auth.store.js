@@ -8,7 +8,8 @@ export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
         user: JSON.parse(localStorage.getItem('user')),
-        returnUrl: null
+        returnUrl: null,
+        isAdmin: false
     }),
     actions: {
         async login(id, pwd) {
@@ -19,6 +20,10 @@ export const useAuthStore = defineStore({
                 }).then(res => {
                     this.user = res.data;
                     localStorage.setItem('user', JSON.stringify(res.data));
+
+                    const adminCode = ['001', '002', '003']
+                    this.isAdmin = adminCode.includes(res.data.deptCode)
+                    console.log(this.isAdmin)
                     router.push('/gw');
                 }).catch(err => {
                     console.log(err);

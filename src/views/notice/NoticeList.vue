@@ -37,7 +37,7 @@
         </table>
     </div>
     <div id="btnArea" v-if="user">
-        <router-link to="/notice/form" class="btn btn-outline-secondary" v-if="user.deptCode === '001'">등록</router-link>
+        <router-link to="/notice/form" class="btn btn-outline-secondary" v-if="isAdmin">등록</router-link>
     </div>
 </template>
 
@@ -48,7 +48,7 @@ import { onMounted, watch } from 'vue';
 
 const noticeStore = useNoticeStore();
 const authStore = useAuthStore();
-const { user } = storeToRefs(authStore);
+const { user, isAdmin } = storeToRefs(authStore);
 const { notices } = storeToRefs(noticeStore);
 
 onMounted(() => {

@@ -65,7 +65,7 @@
                     <td>{{ employee.email }}</td>
                     <td v-if="employee.activeYn === 'Y'">재직</td>
                     <td v-else-if="employee.activeYn === 'N'">퇴사</td>
-                    <td>
+                    <td v-if="user && isAdmin">
                         <button class="btn btn-outline-success m-2" @click="modalStore.open(employee.employeeId)">수정</button>
                         <button class="btn btn-outline-danger" @click="doDelete(employee.employeeId)">퇴사</button>
                     </td>
@@ -77,7 +77,7 @@
 
 <script setup>
 import { EmployeeDetail } from '@/views/employee';
-import { useEmployeeStore, useCommonStore, useAlertStore, useModalStore } from '@/stores';
+import { useEmployeeStore, useCommonStore, useAlertStore, useModalStore, useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
@@ -86,9 +86,11 @@ const employeeStore = useEmployeeStore()
 const commonStore = useCommonStore()
 const alertStore = useAlertStore()
 const modalStore = useModalStore()
+const authStore = useAuthStore()
 const { detailMdl } = storeToRefs(modalStore)
 const { employees, status } = storeToRefs(employeeStore)
 const { positions, departments } = storeToRefs(commonStore)
+const { user, isAdmin } = storeToRefs(authStore)
 
 const searchId = ref('')
 const searchName = ref('')
