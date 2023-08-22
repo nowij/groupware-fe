@@ -17,5 +17,9 @@ export const usePersonalStore = defineStore({
             const response = await axiosWrapper.put('/personal/info/save', param);
             this.status = response.status;
         },
+        async savePwd(param) {
+            const response = await axiosWrapper.put('/personal/savePwd', param)
+            this.status = response.status;
+        }
     }
 })

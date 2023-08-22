@@ -1,9 +1,9 @@
 <template>
-    <div v-if="alert" class="container justify-content-center">
+    <div v-if="alert" class="container justify-content-center ml-5">
         <div class="row m-3">
-            <div class="alert alert-dismissable" :class="alert.type">
+            <div class="alert alert-dismissable mx-auto" :class="alert.type">
                 {{alert.message}}
-                <button @click="alertStore.clear()" class="btn btn-link close">&times;</button>
+                <button @click="alertStore.clear()" class="btn btn-link close" style="float: right">&times;</button>
             </div>
         </div>
     </div>

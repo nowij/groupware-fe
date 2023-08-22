@@ -26,7 +26,12 @@ export const useAuthStore = defineStore({
                     console.log(this.isAdmin)
                     router.push('/gw');
                 }).catch(err => {
-                    console.log(err);
+                    const alertStore = useAlertStore();
+                    if (err.code === 'ERR_BAD_REQUEST') {
+                        alertStore.error("비밀번호를 확인해주세요.");    
+                    } else {
+                        alertStore.error(err);
+                    }
                 });
             } catch (error) {
                 const alertStore = useAlertStore();
