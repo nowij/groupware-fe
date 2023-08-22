@@ -43,7 +43,7 @@ h6 {
 --------------------------------------------------------------*/
 #main {
   margin-top: 20px;
-  margin-left: 200px;
+  /*margin-left: 200px;*/
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -223,6 +223,14 @@ h6 {
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+}
+
+.profileArea {
+  width: 23rem;
+}
+
+.profileBodyArea {
+  width: 40rem;
 }
 
 .card-header,
