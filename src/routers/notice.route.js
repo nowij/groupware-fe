@@ -5,7 +5,8 @@ export default {
     component: Layout,
     children: [
         { path: '', component: NoticeList},
-        { path: 'content', component: NoticeContent},
-        { path: 'form', component: NoticeForm}
+        { path: 'content/:no', component: NoticeContent, props: true, name: 'content'},
+        { path: 'form', component: NoticeForm},
+        { path: 'form?no=:no', component: NoticeForm, name: 'form', props:true}
     ]
 }

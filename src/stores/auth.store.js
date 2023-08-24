@@ -9,7 +9,7 @@ export const useAuthStore = defineStore({
     state: () => ({
         user: JSON.parse(localStorage.getItem('user')),
         returnUrl: null,
-        isAdmin: false
+        isAdmin: localStorage.getItem('admin')
     }),
     actions: {
         async login(id, pwd) {
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore({
 
                     const adminCode = ['001', '002', '003']
                     this.isAdmin = adminCode.includes(res.data.deptCode)
-                    console.log(this.isAdmin)
+                    localStorage.setItem('admin', this.isAdmin)
                     router.push('/gw');
                 }).catch(err => {
                     const alertStore = useAlertStore();
@@ -41,6 +41,7 @@ export const useAuthStore = defineStore({
         logout() {
             this.user = null;
             localStorage.removeItem('user');
+            localStorage.removeItem('admin')
             router.push('/auth/login');
         },
         async register(param) {

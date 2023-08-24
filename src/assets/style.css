@@ -15,12 +15,12 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
+  background: #fcfcfc;
   color: #444444;
 }
 
 a {
-  color: #4154f1;
+  color: #41B883;
   text-decoration: none;
 }
 
@@ -65,7 +65,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: #35495E;
 }
 
 /*--------------------------------------------------------------
@@ -78,7 +78,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: #4154f1;
+  background: #41B883;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -149,7 +149,7 @@ h6 {
 }
 
 .dropdown-menu .dropdown-item:hover {
-  background-color: #f6f9ff;
+  background-color: #fcfcfc;
 }
 
 @media (min-width: 768px) {
@@ -225,14 +225,6 @@ h6 {
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
 }
 
-.profileArea {
-  width: 23rem;
-}
-
-.profileBodyArea {
-  width: 40rem;
-}
-
 .card-header,
 .card-footer {
   border-color: #ebeef4;
@@ -245,7 +237,7 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #35495E;
   font-family: "Poppins", sans-serif;
 }
 
@@ -296,8 +288,8 @@ h6 {
 }
 
 .accordion-button:not(.collapsed) {
-  color: #012970;
-  background-color: #f6f9ff;
+  color: #35495E;
+  background-color: #fcfcfc;
 }
 
 .accordion-flush .accordion-button {
@@ -308,7 +300,7 @@ h6 {
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;
-  color: #4154f1;
+  color: #41B883;
 }
 
 .accordion-flush .accordion-body {
@@ -356,13 +348,13 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+  color: #41B883;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #4154f1;
-  border-bottom: 2px solid #4154f1;
+  color: #41B883;
+  border-bottom: 2px solid #41B883;
 }
 
 /*--------------------------------------------------------------
@@ -386,7 +378,7 @@ h6 {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: #35495E;
   font-family: "Nunito", sans-serif;
 }
 
@@ -405,7 +397,7 @@ h6 {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: #35495E;
 }
 
 .header .search-bar {
@@ -442,7 +434,7 @@ h6 {
 .header .search-form input {
   border: 0;
   font-size: 14px;
-  color: #012970;
+  color: #35495E;
   border: 1px solid rgba(1, 41, 112, 0.2);
   padding: 7px 38px 7px 8px;
   border-radius: 3px;
@@ -465,7 +457,7 @@ h6 {
 }
 
 .header .search-form button i {
-  color: #012970;
+  color: #35495E;
 }
 
 /*--------------------------------------------------------------
@@ -482,13 +474,13 @@ h6 {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #35495E;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #012970;
+  color: #35495E;
 }
 
 .header-nav .nav-profile img {
@@ -537,7 +529,7 @@ h6 {
 }
 
 .header-nav .notifications .notification-item:hover {
-  background-color: #f6f9ff;
+  background-color: #fcfcfc;
 }
 
 .header-nav .messages {
@@ -572,7 +564,7 @@ h6 {
 }
 
 .header-nav .messages .message-item:hover {
-  background-color: #f6f9ff;
+  background-color: #fcfcfc;
 }
 
 .header-nav .profile {
@@ -605,7 +597,7 @@ h6 {
 }
 
 .header-nav .profile .dropdown-item:hover {
-  background-color: #f6f9ff;
+  background-color: #fcfcfc;
 }
 
 /*--------------------------------------------------------------
@@ -696,10 +688,10 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #012970;
+  color: #35495E;
   transition: 0.3;
   background: #fff;
-  /* background: #f6f9ff; */
+  /* background: #fcfcfc */
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -707,12 +699,12 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #012970;
+  color: #35495E;
 }
 
 .sidebar-nav .nav-link.router-link-active.router-link-exact-active {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #41B883;
+  background: #f0fff0;
 }
 
 .sidebar-nav .nav-link.router-link-active.router-link-exact-active i {
@@ -720,12 +712,12 @@ h6 {
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #41B883;
+  background: #D4E8DA;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #41B883;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -748,7 +740,7 @@ h6 {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #012970;
+  color: #35495E;
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
@@ -763,11 +755,11 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #4154f1;
+  color: #41B883;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #4154f1;
+  background-color: #41B883;
 }
 
 /*--------------------------------------------------------------
@@ -784,59 +776,6 @@ h6 {
   bottom:0;
   display:block; 
   padding:15px; 
-}
-
-/*--------------------------------------------------------------
-# fullCalendar
---------------------------------------------------------------*/
-/* 공휴일 */
-.fc-scrollgrid-sync-inner a {
-  color: black;
-}
-.fc .fc-bg-event {
-  background: #b1b1b1;
-  color: black;
-  font-weight: bold
-}
-/* 일요일 */
-.fc-day.fc-day-sun.fc-daygrid-day {
-  background: #b1b1b1;
-}
-.fc-day.fc-day-sun.fc-daygrid-day a {
-  color: red;
-}
-/* 토요일 */
-.fc-day.fc-day-sat.fc-daygrid-day {
-  background: #b1b1b1;
-}
-.fc-day.fc-day-sat.fc-daygrid-day a {
-  color: blue;
-}
-/*--------------------------------------------------------------
-# searchArea
---------------------------------------------------------------*/
-#searchArea select {
-  width: 6rem;
-}
-
-#searchArea input {
-  width: 10rem;
-}
-
-/*--------------------------------------------------------------
-# btnArea
---------------------------------------------------------------*/
-#btnArea {
-  float: right;
-}
-
-#btnArea button {
-  float: right;
-  margin-right: .5rem;
-}
-
-#formBody {
-  width: 70rem;
 }
 
 /*--------------------------------------------------------------
@@ -859,7 +798,7 @@ h6 {
 
 .dashboard .filter .icon:hover,
 .dashboard .filter .icon:focus {
-  color: #4154f1;
+  color: #41B883;
 }
 
 .dashboard .filter .dropdown-header {
@@ -887,7 +826,7 @@ h6 {
 
 .dashboard .info-card h6 {
   font-size: 28px;
-  color: #012970;
+  color: #35495E;
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -903,7 +842,7 @@ h6 {
 }
 
 .dashboard .sales-card .card-icon {
-  color: #4154f1;
+  color: #41B883;
   background: #f6f6fe;
 }
 
@@ -983,12 +922,12 @@ h6 {
 }
 
 .dashboard .news h4 a {
-  color: #012970;
+  color: #35495E;
   transition: 0.3s;
 }
 
 .dashboard .news h4 a:hover {
-  color: #4154f1;
+  color: #41B883;
 }
 
 .dashboard .news p {
@@ -1055,7 +994,7 @@ h6 {
   background-color: #fff;
   border-radius: 0.25rem;
   text-align: center;
-  color: #012970;
+  color: #35495E;
   padding: 15px 0;
 }
 
@@ -1100,7 +1039,7 @@ h6 {
 }
 
 .profile .profile-overview .card-title {
-  color: #012970;
+  color: #35495E;
 }
 
 .profile .profile-overview .label {
@@ -1123,7 +1062,7 @@ h6 {
 .faq .basic h6 {
   font-size: 18px;
   font-weight: 600;
-  color: #4154f1;
+  color: #41B883;
 }
 
 .faq .basic p {
@@ -1140,12 +1079,12 @@ h6 {
 .contact .info-box i {
   font-size: 38px;
   line-height: 0;
-  color: #4154f1;
+  color: #41B883;
 }
 
 .contact .info-box h3 {
   font-size: 20px;
-  color: #012970;
+  color: #35495E;
   font-weight: 700;
   margin: 20px 0 10px 0;
 }
@@ -1207,7 +1146,7 @@ h6 {
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-  border-color: #4154f1;
+  border-color: #41B883;
 }
 
 .contact .php-email-form input {
@@ -1219,7 +1158,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #4154f1;
+  background: #41B883;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1251,7 +1190,7 @@ h6 {
 .error-404 h1 {
   font-size: 180px;
   font-weight: 700;
-  color: #4154f1;
+  color: #41B883;
   margin-bottom: 0;
   line-height: 150px;
 }
@@ -1259,7 +1198,7 @@ h6 {
 .error-404 h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #012970;
+  color: #35495E;
   margin-bottom: 30px;
 }
 
@@ -1291,12 +1230,113 @@ h6 {
 
 .footer .copyright {
   text-align: center;
-  color: #012970;
+  color: #35495E;
 }
 
 .footer .credits {
   padding-top: 5px;
   text-align: center;
   font-size: 13px;
-  color: #012970;
+  color: #35495E;
+}
+
+/*--------------------------------------------------------------
+##### custom #####
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# btn
+--------------------------------------------------------------*/
+.btn-primary {
+  background-color: #4FC08D;
+  border-color: #4FC08D;
+}
+
+.btn-primary:hover {
+  background-color: #6DB283;
+  border-color: #6DB283;
+  color: #35495E;
+}
+
+/*--------------------------------------------------------------
+# NoticeContent
+--------------------------------------------------------------*/
+.noticeDivision {
+  border-top: 1px solid #bcbcbc;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.noticeContentBody {
+  color: #35495E;
+  min-height: 5rem;
+  max-height: 10rem;
+}
+
+
+/*--------------------------------------------------------------
+# profile Area
+--------------------------------------------------------------*/
+.profileArea {
+  width: 23rem;
+}
+
+.profileBodyArea {
+  width: 40rem;
+}
+
+/*--------------------------------------------------------------
+# fullCalendar
+--------------------------------------------------------------*/
+/* 공휴일 */
+.fc-scrollgrid-sync-inner a {
+  color: black;
+}
+.fc .fc-bg-event {
+  background: #b1b1b1;
+  color: black;
+  font-weight: bold
+}
+/* 일요일 */
+.fc-day.fc-day-sun.fc-daygrid-day {
+  background: #b1b1b1;
+}
+.fc-day.fc-day-sun.fc-daygrid-day a {
+  color: red;
+}
+/* 토요일 */
+.fc-day.fc-day-sat.fc-daygrid-day {
+  background: #b1b1b1;
+}
+.fc-day.fc-day-sat.fc-daygrid-day a {
+  color: blue;
+}
+/*--------------------------------------------------------------
+# searchArea
+--------------------------------------------------------------*/
+#searchArea select {
+  width: 6rem;
+}
+
+#searchArea input {
+  width: 10rem;
+}
+
+/*--------------------------------------------------------------
+# btnArea
+--------------------------------------------------------------*/
+.btnArea {
+  float: right;
+}
+
+.btnArea button {
+  float: right;
+  margin-right: .5rem;
+}
+
+#formBody {
+  width: 70rem;
+}
+
+#formBody label {
+  font-weight: bold;
 }
