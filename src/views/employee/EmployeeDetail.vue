@@ -51,7 +51,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" @click="submit">저장</button>
+                    <button type="submit" class="btn btn-primary" @click.self.prevent="submit">저장</button>
                 </div>
             </div>
         </div>

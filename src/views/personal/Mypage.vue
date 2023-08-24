@@ -5,7 +5,7 @@
                 <div class="card profileArea" v-if="user">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                         <img src="@/assets/profile.png" alt="Profile" class="rounded-circle">
-                        <h2>{{ user.userName }}</h2>
+                        <h2>{{ myInfo.userName }}</h2>
                         <h3>{{ positionName }}</h3>
                     </div>
                 </div>
