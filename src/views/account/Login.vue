@@ -6,11 +6,17 @@
         <form class="row g-3" @submit.self.prevent="doSubmit(employeeId, passwd)">
           <div class="col-12">
             <label class="form-label">ID</label>
-            <input type="text" name="employeeId" class="form-control" placeholder="ID" v-model="employeeId" />
+            <input type="text" name="employeeId" class="form-control" placeholder="ID" v-model="employeeId" required/>
+            <div class="invalid-feedback">
+              아이디를 입력하세요.
+            </div>
           </div>
           <div class="col-12">
             <label class="form-label">PASSWORD</label>
-            <input type="password" name="passwd" class="form-control" placeholder="PASSWORD" v-model="passwd" />
+            <input type="password" name="passwd" class="form-control" placeholder="PASSWORD" v-model="passwd" required/>
+            <div class="invalid-feedback">
+              비밀번호를 입력하세요.
+            </div>
           </div>
           <div class="text-center p-2">
             <button type="submit" class="btn btn-primary w-100">로그인</button>

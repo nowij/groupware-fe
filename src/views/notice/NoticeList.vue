@@ -36,6 +36,21 @@
             </tbody>
         </table>
     </div>
+    <div v-if="notices.length > 0">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" >
+					<a class="page-link" aria-label="Previous" @click.prevent="--pageParam.pageNo"><span aria-hidden="true">&laquo;</span></a>
+				</li>
+                <li class="page-item" :class="{ active: pageParam.pageNo === 0 ? pageParam.pageNo === i : pageParam.pageNo === page }" v-for="(page,i) in pageCount" :key="i">
+					<a class="page-link" @click.prevent="pageParam.pageNo = page">{{ page }}</a>
+				</li>
+                <li class="page-item" >
+					<a class="page-link" aria-label="Next" @click.prevent="++pageParam.pageNo"><span aria-hidden="true">&raquo;</span></a>
+				</li>
+            </ul>
+        </nav>
+    </div>
     <div class="btnArea" v-if="user">
         <router-link to="/notice/form" class="btn btn-outline-secondary" v-if="isAdmin">등록</router-link>
     </div>
@@ -45,26 +60,41 @@
 import { router } from '@/routers';
 import { useNoticeStore, useAuthStore } from '@/stores'
 import { storeToRefs } from 'pinia';
-import { onMounted, watch, } from 'vue';
+import { onMounted, watch, reactive, computed } from 'vue';
 
 const noticeStore = useNoticeStore();
 const authStore = useAuthStore();
 const { user, isAdmin } = storeToRefs(authStore);
-const { notices } = storeToRefs(noticeStore);
+const { notices, pageInfo } = storeToRefs(noticeStore);
+const pageParam = reactive({
+    pageNo: 0,
+    pageSize: 5
+})
+const pageCount = computed(() =>
+	Math.ceil(pageInfo.value.totalElements / pageParam.pageSize),
+)
 
 onMounted(() => {
     getList();
 })
 
 const getList = () => {
-    noticeStore.getNotices()
+    if (pageParam.pageNo >= 1){
+        const newParams = {
+            ...pageParam,
+            pageNo: pageParam.pageNo - 1
+        }
+        noticeStore.selectNotices(newParams)
+    } else {
+        noticeStore.selectNotices(pageParam)
+    }
 }
 
 const goPage = (id) => {
     router.push({name: 'content', params: {no: id}})
 }
 
-watch(() => getList)
+watch(() => getList())
 
 </script >
 

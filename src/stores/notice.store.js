@@ -6,12 +6,15 @@ export const useNoticeStore = defineStore({
     state: () => ({
         notices: {},
         status: '',
-        detail: {}
+        detail: {},
+        pageInfo: {}
     }),
     actions: {
-        async getNotices() {
-            const response = await axiosWrapper.get("/notice");
-            this.notices = response.data;
+        async selectNotices(param) {
+            const response = await axiosWrapper.post("/notice", param)
+            const { content, pageSize, totalElements, totalPages } = response.data
+            this.notices = content
+            this.pageInfo = {pageSize, totalElements, totalPages }
         },
         async saveNotice(param) {
             const response = await axiosWrapper.post("/notice/save", param)

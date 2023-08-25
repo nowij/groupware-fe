@@ -6,20 +6,24 @@ export const useEmployeeStore = defineStore({
     state: () => ({
         employees: {},
         id: '',
-        status: 0
+        status: 0,
+        pageInfo: {}
     }),
     actions: {
-        async getEmployees() {
+        async selectEmployees(param) {
             try {
-                const response = await axiosWrapper.get('/employee/info');
-                this.employees = response.data;
+                const response = await axiosWrapper.post('/employee', param)
+                const { content, pageSize, totalElements, totalPages } = response.data
+                this.employees = content
+                this.pageInfo = {pageSize, totalElements, totalPages }
             } catch (error) {
                 console.log(error);
             }
         },
         async selectEmployee(param) {
             try {
-                const response = await axiosWrapper.post('/employee/info/search', param);
+                console.log(param)
+                const response = await axiosWrapper.post('/employee/search', param);
                 this.employees = response.data;
             } catch (error) {
                 console.log(error);

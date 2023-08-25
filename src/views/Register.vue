@@ -5,36 +5,36 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title text-center pb-3 fs-4">회원가입</h5>
-                        <form class="row g-3">
+                        <form class="row g-3 needs-validation" @submit.self.prevent="doSubmit">
                             <div class="col-md-6">
                                 <label class="form-label">사번</label>
-                                <input type="text" class="form-control" v-model="id">
+                                <input type="text" class="form-control" v-model="id" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">부서</label>
-                                <select class="form-select" v-model="dept">
+                                <select class="form-select" v-model="dept" required>
                                     <option :value="department.deptCode" v-for="(department, i) in departments" :key="i">
                                         {{ department.deptName }}</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 has-validation">
                                 <label class="form-label">이름</label>
-                                <input type="text" class="form-control" v-model="name">
+                                <input type="text" class="form-control" v-model="name" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">직위</label>
-                                <select class="form-select" v-model="posit">
+                                <select class="form-select" v-model="posit" required>
                                     <option :value="position.positCode" v-for=" (position, i) in positions" :key="i">
                                         {{ position.positName }}</option>
                                 </select>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">입사일</label>
-                                <Datepicker class="form-control" v-model="joinDate" :locale="locale" :input-format="format" />
+                                <Datepicker class="form-control" v-model="joinDate" :locale="locale" :input-format="format"/>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">비밀번호</label>
-                                <input type="password" class="form-control" v-model="pwd">
+                                <input type="password" class="form-control" v-model="pwd" required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">이메일</label>
@@ -52,7 +52,7 @@
                                 <input type="text" class="form-control" v-model="addr">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary w-100" @click="doSubmit">등록</button>
+                                <button type="submit" class="btn btn-primary w-100">등록</button>
                             </div>
                         </form>
                     </div>

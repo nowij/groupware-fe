@@ -55,7 +55,7 @@
                     <th>재직상태</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="employees.length > 0">
                 <tr v-for="(employee, i) in employees" :key="i">
                     <td>{{ employee.employeeId }}</td>
                     <td>{{ employee.userName }}</td>
@@ -73,13 +73,28 @@
             </tbody>
         </table>
     </div>
+    <div v-if="employees.length > 0">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" >
+					<a class="page-link" aria-label="Previous" @click.prevent="--pageParam.pageNo"><span aria-hidden="true">&laquo;</span></a>
+				</li>
+                <li class="page-item" :class="{ active: pageParam.pageNo === 0 ? pageParam.pageNo === i : pageParam.pageNo === page }" v-for="(page,i) in pageCount" :key="i">
+					<a class="page-link" @click.prevent="pageParam.pageNo = page">{{ page }}</a>
+				</li>
+                <li class="page-item" >
+					<a class="page-link" aria-label="Next" @click.prevent="++pageParam.pageNo"><span aria-hidden="true">&raquo;</span></a>
+				</li>
+            </ul>
+        </nav>
+    </div>
 </template>
 
 <script setup>
 import { EmployeeDetail } from '@/views/employee';
 import { useEmployeeStore, useCommonStore, useAlertStore, useModalStore, useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
+import { onMounted, reactive, computed, watch } from 'vue';
 import { ref } from 'vue';
 
 const employeeStore = useEmployeeStore()
@@ -88,7 +103,7 @@ const alertStore = useAlertStore()
 const modalStore = useModalStore()
 const authStore = useAuthStore()
 const { detailMdl } = storeToRefs(modalStore)
-const { employees, status } = storeToRefs(employeeStore)
+const { employees, status, pageInfo } = storeToRefs(employeeStore)
 const { positions, departments } = storeToRefs(commonStore)
 const { user, isAdmin } = storeToRefs(authStore)
 
@@ -97,7 +112,14 @@ const searchName = ref('')
 const searchPhone = ref('')
 const searchPosit = ref('')
 const searchDept = ref('')
-const activeYn = ref('Y')
+const activeYn = ref('Y{')
+const pageParam = reactive({
+    pageNo: 0,
+    pageSize: 5
+})
+const pageCount = computed(() =>
+	Math.ceil(pageInfo.value.totalElements / pageParam.pageSize),
+)
 
 onMounted(() => {
     getList(),
@@ -106,8 +128,18 @@ onMounted(() => {
 
 // methods
 const getList = () => {
-    employeeStore.getEmployees()
+    if (pageParam.pageNo >= 1){
+        const newParams = {
+            ...pageParam,
+            pageNo: pageParam.pageNo - 1
+        }
+        employeeStore.selectEmployees(newParams)
+    } else {
+        employeeStore.selectEmployees(pageParam)
+    }
 }
+
+watch(() => getList())
 
 const getCommon = () => {
     commonStore.getPositions();

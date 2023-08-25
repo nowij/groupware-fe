@@ -70,13 +70,12 @@
                                 </form>
                             </div>
                             <!-- 비밀번호 변경 -->
-                            <div class="tab-pane fade show active profile-overview" id="change-password"
-                                v-else-if="changpw">
-                                <form novalidate>
+                            <div class="tab-pane fade show active profile-overview" id="change-password" v-else-if="changpw">
+                                <form @submit.self.prevent="savePwd">
                                     <div class="row mb-3">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">현재 비밀번호</label>
                                         <div class="col-md-8 col-lg-9"> 
-                                            <input name="password" type="password" class="form-control" id="currentPassword" v-model="currentPw">
+                                            <input name="password" type="password" class="form-control" id="currentPassword" v-model="currentPw" required>
                                         </div>
                                         <div class="invalid-feedback">
                                             비밀번호를 확인해주세요
@@ -95,7 +94,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary w-100" @click.self.prevent="savePwd">저장</button>
+                                        <button type="submit" class="btn btn-primary w-100">저장</button>
                                     </div>
                                 </form>
                             </div>
