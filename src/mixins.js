@@ -27,7 +27,6 @@ function request(method) {
         .then(res => {
             console.log(res.data);
             return res;
-            //handleResponse(res);
         })
         .catch(err => {
             console.log('axios 에러');
@@ -41,11 +40,8 @@ function authHeader() {
     const { user } = useAuthStore();
     const isLoggedIn = !!user?.token || !!JSON.parse(user)?.token;
     const token = user.token === undefined ? JSON.parse(user).token : user.token;
-    //const isApiUrl = url.startsWith(baseUrl);
     console.log('>>> isLoggedIn')
     console.log(isLoggedIn)
-    //console.log('>>> isApiUrl')
-    //console.log(isApiUrl)
     if (isLoggedIn) {
         const auth_token = { Authorization: `Bearer ${token}` }
         console.log(auth_token)
@@ -54,25 +50,3 @@ function authHeader() {
         return {};
     }
 }
-
-// async function handleResponse(response) {
-//     const isJson = response.headers?.get('content-type')?.includes('application/json');
-//     const data = isJson ? await response.JSON : null;
-
-//     console.log("response 확인");
-//     console.log(response);
-
-//     // check for error response
-//     if (response.status != 200) {
-//         const { user, logout } = useAuthStore();
-//         if ([401, 403].includes(response.status) && user) {
-//             // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-//             logout();
-//         }
-
-//         // get error message from body or default to response status
-//         const error = (data && data.message) || response.status;
-//         return Promise.reject(error);
-//     }
-//     return data;
-// }
