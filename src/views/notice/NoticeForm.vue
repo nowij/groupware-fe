@@ -63,7 +63,9 @@ const doSubmit = () => {
         }
         noticeStore.saveNotice(datas);
     } else {
-        noticeStore.updateContent(details.value)
+        const datas = { ...details.value }
+        console.log(details.value);
+        noticeStore.updateContent(datas)
     }
 
     // TODO : 저장완료 모달창 띄우고 페이지 list로 가게 수정

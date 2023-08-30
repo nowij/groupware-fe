@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h3>{{ content.title }}</h3>
+        <h3>{{ contents.title }}</h3>
     </div>
     <div class="pb-2">
-        {{ content.employeeName }} | {{ content.firstDate }}
+        {{ contents.employeeName }} | {{ contents.firstDate }}
     </div>
     <div class="noticeDivision"></div>
-    <div class="noticeContentBody">
-        {{ content.content }}
+    <div class="noticeContentBody" v-html="content">
     </div>
     <div class="btnArea">
         <router-link v-if="isAdmin" :to="{name: 'form', query: {no: props.no}}"><button class="btn btn-outline-warning">수정</button></router-link>
@@ -18,21 +17,26 @@
 
 <script setup>
 import { router } from '@/routers';
-import { defineProps, onMounted, ref } from 'vue'
+import { defineProps, onMounted, ref, computed } from 'vue'
 import { useNoticeStore, useAuthStore } from '@/stores'
 import { storeToRefs } from 'pinia';
 
 const noticeStore = useNoticeStore()
 const authStore = useAuthStore();
 const { isAdmin } = storeToRefs(authStore);
-const content =  ref({})
+const contents =  ref({})
 const props = defineProps({
     no: Number
 })
+const content = computed(() => {
+    return contents.value.content?.split('\n').join('<br>')
+})
+
 
 onMounted(async () => {
-    content.value = await noticeStore.selectContent(props.no)
+    contents.value = await noticeStore.selectContent(props.no)
 })
+
 
 // methods
 const goList = () => {

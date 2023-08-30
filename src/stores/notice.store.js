@@ -24,8 +24,9 @@ export const useNoticeStore = defineStore({
             const response = await axiosWrapper.get(`/notice/content/${param}`)
             return response.data
         },
-        updateContent(param) {
-            axiosWrapper.put('/notice/content/update', param)
+        async updateContent(param) {
+            const response = await axiosWrapper.put('/notice/content/update', param)
+            this.status = response.status
         },
         async deleteContent(param) {
             const response = await axiosWrapper.delete('/notice/delete', param)
