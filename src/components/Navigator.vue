@@ -30,7 +30,7 @@
         <router-link to="/employee" class="nav-link">
           <i class="bi bi-search"></i>
           <span v-if="isAdmin">직원관리</span>
-          <span v-else>정보조회</span>
+          <span v-else>직원조회</span>
         </router-link>
       </li>
       <li class="nav-item">
