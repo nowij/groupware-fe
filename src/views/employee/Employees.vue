@@ -112,7 +112,7 @@ const searchName = ref('')
 const searchPhone = ref('')
 const searchPosit = ref('')
 const searchDept = ref('')
-const activeYn = ref('Y{')
+const activeYn = ref('Y')
 const pageParam = reactive({
     pageNo: 0,
     pageSize: 5
