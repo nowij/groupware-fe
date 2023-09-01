@@ -47,6 +47,12 @@ export const useAuthStore = defineStore({
         async register(param) {
             try {
                 axios.post('/auth/register', param)
+                    .then(res => {
+                        if (res.status == 200) {
+                            return res.status
+                        }
+                        
+                    })
                     .catch(err => {
                         console.log(err);
                     });

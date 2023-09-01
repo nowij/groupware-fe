@@ -24,7 +24,10 @@ export const useEmployeeStore = defineStore({
             try {
                 console.log(param)
                 const response = await axiosWrapper.post('/employee/search', param);
-                this.employees = response.data;
+                const { content, totalElements } = response.data
+                this.pageInfo = { totalElements }
+                this.employees = content
+                console.log(response.data)
             } catch (error) {
                 console.log(error);
             }

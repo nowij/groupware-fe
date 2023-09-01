@@ -55,7 +55,7 @@ const calendarOptions = {
           setFirstWorkDay(year, month, day)
         } else if (day <= 3) {
           // 16
-          setSecondWorkDay(year, month, day)
+          setSecondWorkDay(year, month-1, day)
         } else {
           alertStore.error('입력 기간이 아닙니다')
         }
@@ -115,7 +115,8 @@ const setFirstWorkDay = (y, m, d) => {
 }
 
 const setSecondWorkDay = (y, m, d) => {
-  const date = `${y}${m}${d}`
+  const prevMonth = m < 10 ? `0${m}` : m
+  const date = `${y}${prevMonth}${d}`
   const calendarApi = fullCalendar.value.getApi()
   for (let i = 16; i < 32; i++) {
     if (i < 10) {
@@ -124,8 +125,8 @@ const setSecondWorkDay = (y, m, d) => {
     calendarApi.addEvent(
       {
         id: `${user.value.employeeId}_${date}_${i}`,
-        title: `${y}${m} 근무`,
-        start: `${y}-${m}-${i}`,
+        title: `${y}${prevMonth} 근무`,
+        start: `${y}-${prevMonth}-${i}`,
         color: '#005b96'
       }
     )

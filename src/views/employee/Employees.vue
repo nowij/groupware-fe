@@ -160,6 +160,10 @@ const doSearch = () => {
         },
     }
     employeeStore.selectEmployee(searchParams);
+    // page 설정
+    const page = pageInfo.value.totalElements % pageParam.pageSize == 0 ? 0 : 1
+    pageInfo.value.totalPages = Math.trunc(pageInfo.value.totalElements / pageParam.pageSize) + page
+
 }
 
 const doReset = () => {
